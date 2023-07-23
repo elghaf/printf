@@ -15,9 +15,9 @@ int print_char(char c)
 }
 
 /**
- * print_string - Prints a string
- * @str: The string to be printed
- * Return: Number of characters printed
+ * print_string - Prints a string of char.
+ * @str: The string to be printed.
+ * Return: Number of characters printed.
  */
 
 int print_string(const char *str)
@@ -40,9 +40,9 @@ int print_string(const char *str)
 
 /**
  * process_format - Processes the format string and prints accordingly
- * @format: The format string
- * @args: The va_list containing arguments
- * Return: Total number of characters printed
+ * @format: The format string of character.
+ * @args: The va_list containing arguments input.
+ * Return: int Total number of characters printed in.
  */
 
 int process_format(const char *format, va_list args)
