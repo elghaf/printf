@@ -13,7 +13,7 @@ int print_char(char c)
 	char character;
 
 	character = c;
-	my_putchar(character);
+	m_putchars(character);
 	return (1);
 }
 
@@ -34,7 +34,7 @@ int print_string(const char *str)
 	while (index < len_of_our_string)
 	{
 		/* code */
-		my_putchar(str[index]);
+		m_putchars(str[index]);
 		index++;
 	}
 
@@ -61,26 +61,26 @@ int process_format(const char *format, va_list args)
 
 			switch (*format)
 			{
+				case '%':
+					m_putchars('%');
+					total_count++;
+					break;
 				case 'c':
 					total_count += print_char(va_arg(args, int));
 					break;
 				case 's':
 					total_count += print_string(va_arg(args, const char *));
 					break;
-				case '%':
-					my_putchar('%');
-					total_count++;
-					break;
 				default:
-					my_putchar('%');
-					my_putchar(*format);
+					m_putchars('%');
+					m_putchars(*format);
 					total_count += 2;
 					break;
 			}
 		}
 		else
 		{
-			my_putchar(c);
+			m_putchars(c);
 			total_count++;
 		}
 		format++;

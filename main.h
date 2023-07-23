@@ -4,6 +4,6 @@
 #include <stddef.h>
 
 int _printf(const char *format, ...);
-int my_putchar(char c);
+int m_putchars(char c);
 
 #endif
