@@ -1,30 +1,65 @@
 #include <stdarg.h>
-#include <stdio.h>
+#include "main.h"
+#include <string.h>
 
 /**
- * _printf - Prints a formatted string to the standard output.
- * @format: A pointer to a character string.
- *
- * Return: The number of characters printed (excluding the null byte used to
- * end output to strings).
+ * print_char - Prints a single character
+ * @c: The character to be printed
+ * Return: Number of characters printed (always 1)
  */
-int _printf(const char *format, ...)
+
+int print_char(char c)
 {
-	va_list my_args;
+	char character;
+
+	character = c;
+	m_putchars(character);
+	return (1);
+}
+
+/**
+ * print_string - Prints a string
+ * @str: The string to be printed
+ * Return: Number of characters printed
+ */
+
+int print_string(const char *str)
+{
+	int index = 0, len_of_our_string;
+
+	if (str == NULL)
+		str = "(null)";
+
+	len_of_our_string = strlen(str);
+	while (index < len_of_our_string)
+	{
+		/* code */
+		m_putchars(str[index]);
+		index++;
+	}
+
+	return (len_of_our_string);
+}
+
+/**
+ * process_format - Processes the format string and prints accordingly
+ * @format: The format string
+ * @args: The va_list containing arguments
+ * Return: Total number of characters printed
+ */
+
+int process_format(const char *format, va_list my_args)
+{
 	int count = 0;
 	char buffer[20];
 	char *s;
 	int num, len, i;
 
-	if (format == NULL)
-		return -1;
-
-	va_start(my_args, format);
 	while (*format)
 	{
 		if (*format != '%')
 		{
-			m_putchars(*format);
+			putchar(*format);
 			count++;
 		}
 		else
@@ -33,7 +68,7 @@ int _printf(const char *format, ...)
 			switch (*format)
 			{
 			case 'c':
-				m_putchars(va_arg(my_args, int));
+				putchar(va_arg(my_args, int));
 				count++;
 				break;
 			case 's':
@@ -49,7 +84,7 @@ int _printf(const char *format, ...)
 				num = va_arg(my_args, int);
 				if (num < 0)
 				{
-					m_putchars('-');
+					putchar('-');
 					count++;
 					num = -num;
 				}
@@ -60,19 +95,52 @@ int _printf(const char *format, ...)
 				} while (num > 0);
 				for (i = len - 1; i >= 0; i--)
 				{
-					m_putchars(buffer[i]);
+					putchar(buffer[i]);
 				}
 				count += len;
 				break;
 			default:
-				m_putchars('%');
-				m_putchars(*format);
+				putchar('%');
+				putchar(*format);
 				count += 2;
 				break;
 			}
 		}
 		format++;
 	}
-	va_end(my_args);
-	return count;
+	return (total_count);
+}
+
+/**
+ * _printf - Prints formatted output
+ * @format: The format string
+ * Return: Number of characters printed
+ */
+
+int _printf(const char *format, ...)
+{
+	va_list args;
+	int total_count;
+	char buffer[20];
+	char *s;
+	int num, len, i;
+
+	va_start(args, format);
+
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+	{
+		va_end(args);
+		return (-1);
+	}
+
+	if (strcmp(format, "% ") == 0 || strcmp(format, "%") == 0)
+	{
+		va_end(args);
+		return (-1);
+	}
+
+	total_count = process_format(format, args);
+
+	va_end(args);
+	return (total_count);
 }
