@@ -1,16 +1,15 @@
-#include"main.h"
-#include<stdarg.h>
+#include <stdarg.h>
+#include "main.h"
 
 /**
  * _printf - Prints a formatted string to the standard output.
  * @format: A pointer to a character string.
  *
- * Return: The number of characters printed (excluding the null byte used to
- * end output to strings).
+ * Return: The number of characters printed.
  */
 int _printf(const char *format, ...)
 {
-	va_list args;
+	va_list ap;
 	int count = 0, digit, sign, len, num, i;
 	char buffer[20];
 	char c;
@@ -22,7 +21,9 @@ int _printf(const char *format, ...)
 		return (-1);
 	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
-	va_start(args, format);
+
+	va_start(ap, format);
+
 	while (*format != '\0')
 	{
 		if (*format == '%')
@@ -30,28 +31,28 @@ int _printf(const char *format, ...)
 			format++;
 			if (*format == '%')
 			{
-				putchar('%');
+				_putchar('%');
 				count++;
 			}
 			else if (*format == 'c')
 			{
-				c = (char) va_arg(args, int);
-				putchar(c);
+				c = (char) va_arg(ap, int);
+				_putchar(c);
 				count++;
 			}
 			else if (*format == 's')
 			{
-				s = va_arg(args, char *);
+				s = va_arg(ap, char *);
 				while (*s != '\0')
 				{
-					putchar(*s);
+					_putchar(*s);
 					count++;
 					s++;
 				}
 			}
 			else if (*format == 'd' || *format == 'i')
 			{
-				num = va_arg(args, int);
+				num = va_arg(ap, int);
 				sign = 1;
 				if (num < 0)
 				{
@@ -65,14 +66,16 @@ int _printf(const char *format, ...)
 					len++;
 					num /= 10;
 				} while (num > 0);
+
 				if (sign == -1)
 				{
-					putchar('-');
+					_putchar('-');
 					count++;
 				}
+
 				for (i = len - 1; i >= 0; i--)
 				{
-					putchar(buffer[i]);
+					_putchar(buffer[i]);
 					count++;
 				}
 			}
@@ -80,11 +83,13 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			putchar(*format);
+			_putchar(*format);
 			count++;
 			format++;
 		}
 	}
-	va_end(args);
+
+	va_end(ap);
+
 	return (count);
 }
