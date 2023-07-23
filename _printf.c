@@ -10,7 +10,10 @@
 
 int print_char(char c)
 {
-	my_putchar(c);
+	char character;
+
+	character = c;
+	my_putchar(character);
 	return (1);
 }
 
