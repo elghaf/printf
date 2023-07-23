@@ -32,7 +32,7 @@ int _printf(const char *format, ...)
             {
                 case 'c':
                     // Print a character
-                    putchar(va_arg(args, int));
+                    print_putchar(va_arg(args, int));
                     chars_printed++;
                     break;
                 case 's':
@@ -41,14 +41,14 @@ int _printf(const char *format, ...)
                     const char *str = va_arg(args, const char*);
                     while (*str)
                     {
-                        putchar(*str++);
+                        print_putchar(*str++);
                         chars_printed++;
                     }
                     break;
                 }
                 case '%':
                     // Print '%'
-                    putchar('%');
+                    print_putchar('%');
                     chars_printed++;
                     break;
                 default:
@@ -59,11 +59,23 @@ int _printf(const char *format, ...)
         else
         {
             // Regular character, just print it
-            putchar(c);
+            print_putchar(c);
             chars_printed++;
         }
     }
 
     va_end(args);
     return chars_printed;
+}
+
+/**
+ * print_putchar - print character.
+ * @c: char to print.
+ * Return: int 1.
+ */
+
+int print_putchar(char c)
+{
+	_putchar(c);
+	return (1);
 }
