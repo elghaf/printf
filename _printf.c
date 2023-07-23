@@ -59,7 +59,7 @@ int process_format(const char *format, va_list my_args)
 	{
 		if (*format != '%')
 		{
-			putchar(*format);
+			m_putchars(*format);
 			count++;
 		}
 		else
@@ -68,7 +68,7 @@ int process_format(const char *format, va_list my_args)
 			switch (*format)
 			{
 			case 'c':
-				putchar(va_arg(my_args, int));
+				m_putchars(va_arg(my_args, int));
 				count++;
 				break;
 			case 's':
@@ -84,7 +84,7 @@ int process_format(const char *format, va_list my_args)
 				num = va_arg(my_args, int);
 				if (num < 0)
 				{
-					putchar('-');
+					m_putchars('-');
 					count++;
 					num = -num;
 				}
@@ -95,13 +95,13 @@ int process_format(const char *format, va_list my_args)
 				} while (num > 0);
 				for (i = len - 1; i >= 0; i--)
 				{
-					putchar(buffer[i]);
+					m_putchars(buffer[i]);
 				}
 				count += len;
 				break;
 			default:
-				putchar('%');
-				putchar(*format);
+				m_putchars('%');
+				m_putchars(*format);
 				count += 2;
 				break;
 			}
