@@ -50,7 +50,7 @@ while (*format != '\0') {
                 total_counts++;
                 break;
             case 'c':
-                c = (char)va_arg(argument, int);
+                c = va_arg(argument, int);
                 print_char(c);
                 total_counts++;
                 break;
