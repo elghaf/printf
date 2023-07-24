@@ -20,49 +20,49 @@ int _putchar(char c)
  */
 int _printf(const char *format, ...)
 {
-	va_list args;
-	int count = 0;
-	char ch;
+	va_list arguments;
+	int character_count = 0;
+	char current_char;
 
-	va_start(args, format);
+	va_start(arguments, format);
 
-	while ((ch = *format++) != '\0')
+	while ((current_char = *format++) != '\0')
 	{
-		if (ch != '%')
+		if (current_char != '%')
 		{
-			_putchar(ch);
-			count++;
+			_putchar(current_char);
+			character_count++;
 		}
 		else
 		{
-			ch = *format++;
-			switch (ch)
+			current_char = *format++;
+			switch (current_char)
 			{
 				case 'c':
-					count += print_char(args);
+					character_count += print_single_char(arguments);
 					break;
 				case 's':
-					count += print_string(args);
+					character_count += print_string(arguments);
 					break;
 				case '%':
 					_putchar('%');
-					count++;
+					character_count++;
 					break;
 				case 'd':
 				case 'i':
-					count += print_int(args);
+					character_count += print_integer(arguments);
 					break;
 				case 'u':
-					count += print_unsigned(args);
+					character_count += print_unsigned_integer(arguments);
 					break;
 				case 'o':
-					count += print_octal(args);
+					character_count += print_octal_integer(arguments);
 					break;
 				case 'x':
-					count += print_hex(args);
+					character_count += print_hexadecimal(arguments);
 					break;
 				case 'X':
-					count += print_hex_upper(args);
+					character_count += print_hexadecimal_uppercase(arguments);
 					break;
 				default:
 					break;
@@ -70,7 +70,6 @@ int _printf(const char *format, ...)
 		}
 	}
 
-	va_end(args);
-	return count;
+	va_end(arguments);
+	return (character_count);
 }
-
