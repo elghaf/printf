@@ -1,10 +1,21 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-int _putchar(char c)
+/**
+ * print_char - Prints a single character
+ * @c: The character to be printed
+ * Return: Number of characters printed (always 1)
+ */
+
+int print_char(char c)
 {
-    return (write(1, &c, 1));
+	char character;
+
+	character = c;
+	m_putchars(character);
+	return (1);
 }
+
 
 int _printf(const char *format, ...)
 {
@@ -17,7 +28,7 @@ int _printf(const char *format, ...)
     {
         if (*format != '%')
         {
-            _putchar(*format);
+            m_putchar(*format);
             count++;
         }
         else
@@ -28,13 +39,13 @@ int _printf(const char *format, ...)
 
             if (*format == '%') // Print a literal '%'
             {
-                _putchar('%');
+                m_putchar('%');
                 count++;
             }
             else if (*format == 'c') // Print a character
             {
                 char c = (char)va_arg(args, int);
-                _putchar(c);
+                m_putchar(c);
                 count++;
             }
             else if (*format == 's') // Print a string
@@ -45,7 +56,7 @@ int _printf(const char *format, ...)
 
                 while (*str)
                 {
-                    _putchar(*str);
+                    m_putchar(*str);
                     str++;
                     count++;
                 }
@@ -58,12 +69,12 @@ int _printf(const char *format, ...)
 
                 if (num == 0) // Special case for 0
                 {
-                    _putchar('0');
+                    m_putchar('0');
                     count++;
                 }
                 else if (num < 0) // Handle negative numbers
                 {
-                    _putchar('-');
+                    m_putchar('-');
                     count++;
 
                     // Convert negative number to positive for easier handling
@@ -86,7 +97,7 @@ int _printf(const char *format, ...)
                         divisor *= 10;
 
                     int digit = num / divisor;
-                    _putchar('0' + digit);
+                    m_putchar('0' + digit);
                     count++;
 
                     num %= divisor;
@@ -94,8 +105,8 @@ int _printf(const char *format, ...)
             }
             else // Unsupported specifier, print it as is
             {
-                _putchar('%');
-                _putchar(*format);
+                m_putchar('%');
+                m_putchar(*format);
                 count += 2;
             }
         }
