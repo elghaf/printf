@@ -1,51 +1,120 @@
-#include "main.h"
 #include <stdarg.h>
-#include <unistd.h>
+#include "main.h"
+#include <string.h>
 
 /**
- * _printf - produce output according to a format
- * @format: A character string
- *
- * Return: The number of characters printed
+ * print_char - Prints a single character
+ * @c: The character to be printed
+ * Return: Number of characters printed (always 1)
  */
+
+int print_char(char c)
+{
+	char character;
+
+	character = c;
+	m_putchars(character);
+	return (1);
+}
+
+/**
+ * print_string - Prints a string
+ * @str: The string to be printed
+ * Return: Number of characters printed
+ */
+
+int print_string(const char *str)
+{
+	int index = 0, len_of_our_string;
+
+	if (str == NULL)
+		str = "(null)";
+
+	len_of_our_string = strlen(str);
+	while (index < len_of_our_string)
+	{
+		/* code */
+		m_putchars(str[index]);
+		index++;
+	}
+
+	return (len_of_our_string);
+}
+
+/**
+ * process_format - Processes the format string and prints accordingly
+ * @format: The format string
+ * @args: The va_list containing arguments
+ * Return: Total number of characters printed
+ */
+
+int process_format(const char *format, va_list args)
+{
+	int total_count = 0;
+	char c;
+
+	while ((c = *format))
+	{
+		if (c == '%')
+		{
+			format++;
+
+			switch (*format)
+			{
+				case '%':
+					m_putchars('%');
+					total_count++;
+					break;
+				case 'c':
+					total_count += print_char(va_arg(args, int));
+					break;
+				case 's':
+					total_count += print_string(va_arg(args, const char *));
+					break;
+				default:
+					m_putchars('%');
+					m_putchars(*format);
+					total_count += 2;
+					break;
+			}
+		}
+		else
+		{
+			m_putchars(c);
+			total_count++;
+		}
+		format++;
+	}
+	return (total_count);
+}
+
+/**
+ * _printf - Prints formatted output
+ * @format: The format string
+ * Return: Number of characters printed
+ */
+
 int _printf(const char *format, ...)
 {
-	int (*print_function)(char, const char *, int);
-	int num_characters = 0, n = 0;
-	char *s = NULL, c = 'o';
 	va_list args;
+	int total_count;
 
 	va_start(args, format);
-	if (format != NULL)
+
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
 	{
-		while (*format != '\0')
-		{
-			if (*format != '%')
-				num_characters += _putchar(*format);
-			else if (*(format + 1) != '\0')
-			{
-				print_function = get_print_function(++format);
-				if (*format == 'c')
-					n = print_function(va_arg(args, int), s, n);
-				else if (*format == 's')
-					n = print_function(c, va_arg(args, char *), n);
-				else if (*format == '%')
-					n = print_function('%', s, n);
-				else if (*format == 'b')
-					n = print_function(*format, s, va_arg(args, int));
-				else
-					return (-1);
-				if (n == -1)
-					return (-1);
-				num_characters += n;
-			}
-			else
-				return (-1);
-			format++;
-		}
-	}
-	else
+		va_end(args);
 		return (-1);
+	}
+
+	if (strcmp(format, "% ") == 0 || strcmp(format, "%") == 0)
+	{
+		va_end(args);
+		return (-1);
+	}
+
+	total_count = process_format(format, args);
+
 	va_end(args);
-	return (num_characters);
+	return (total_count);
 }
