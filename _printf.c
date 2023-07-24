@@ -2,8 +2,8 @@
 #include "main.h"
 
 /**
- * print_char - Prints a single character
- * @c: The character to be printed
+ * print_char - Prints one character.
+ * @c: The character to be printed.
  * Return: Number of characters printed (always 1)
  */
 
@@ -24,8 +24,8 @@ int print_char(char c)
  */
 int _printf(const char *format, ...)
 {
-	va_list ap;
-	int count = 0, digit, sign, len, num, i;
+	va_list argument;
+	int total_counts = 0, digit, sign, len = 0, num, i;
 	char buffer[20];
 	char c;
 	char *s;
@@ -37,74 +37,71 @@ int _printf(const char *format, ...)
 	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
 
-	va_start(ap, format);
+	va_start(argument, format);
 
-	while (*format != '\0')
-	{
-		if (*format == '%')
-		{
-			format++;
-			if (*format == '%')
-			{
-				print_char('%');
-				count++;
-			}
-			else if (*format == 'c')
-			{
-				c = (char) va_arg(ap, int);
-				print_char(c);
-				count++;
-			}
-			else if (*format == 's')
-			{
-				s = va_arg(ap, char *);
-				while (*s != '\0')
-				{
-					print_char(*s);
-					count++;
-					s++;
-				}
-			}
-			else if (*format == 'd' || *format == 'i')
-			{
-				num = va_arg(ap, int);
-				sign = 1;
-				if (num < 0)
-				{
-					sign = -1;
-					num = -num;
-				}
-				len = 0;
-				do {
-					digit = num % 10;
-					buffer[len] = digit + '0';
-					len++;
-					num /= 10;
-				} while (num > 0);
 
-				if (sign == -1)
-				{
-					print_char('-');
-					count++;
-				}
 
-				for (i = len - 1; i >= 0; i--)
-				{
-					print_char(buffer[i]);
-					count++;
-				}
-			}
-			format++;
-		}
-		else
-		{
-			print_char(*format);
-			count++;
-			format++;
-		}
-	}
+while (*format != '\0') {
+    if (*format == '%') {
+        format++;
+        switch (*format) {
+            case '%':
+                print_char('%');
+                total_counts++;
+                break;
+            case 'c':
+                c = (char)va_arg(argument, int);
+                print_char(c);
+                total_counts++;
+                break;
+            case 's': {
+                s = va_arg(argument, char *);
+                while (*s != '\0') {
+                    print_char(*s);
+                    total_counts++;
+                    s++;
+                }
+                break;
+            }
+            case 'd':
+            case 'i': {
+                num = va_arg(argument, int);
+                sign = 1;
+                if (num < 0) {
+                    sign = -1;
+                    num = -num;
+                }
+                len = 0;
+                do {
+                    digit = num % 10;
+                    buffer[len] = digit + '0';
+                    len++;
+                    num /= 10;
+                } while (num > 0);
 
-	va_end(ap);
+                if (sign == -1) {
+                    print_char('-');
+                    total_counts++;
+                }
 
-	return (count);
+                for ( i = len - 1; i >= 0; i--) {
+                    print_char(buffer[i]);
+                    total_counts++;
+                }
+                break;
+            }
+            default:
+                break;
+        }
+        format++;
+    } else {
+        print_char(*format);
+        total_counts++;
+        format++;
+    }
+}
+
+	va_end(argument);
+
+	return (total_counts);
 }
