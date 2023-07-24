@@ -4,19 +4,19 @@
 #include <unistd.h>
 #include <stdarg.h>
 
-/* Function prototypes for handling each conversion specifier */
-int print_char(va_list args);
-int print_string(va_list args);
-int print_int(va_list args);
-int print_unsigned(va_list args);
-int print_octal(va_list args);
-int print_hex(va_list args);
-int print_hex_upper(va_list args);
-
-/* _putchar - Writes a character to stdout. */
+/* _putchar - stdout */
 int _putchar(char c);
 
-/* _printf - Custom implementation of printf. */
+/* Function prototypes of my understanding*/
+int print_single_char(va_list args);
+int print_string(va_list args);
+int print_integer(va_list args);
+int print_unsigned_integer(va_list args);
+int print_octal_integer(va_list args);
+int print_hexadecimal(va_list args);
+int print_hexadecimal_uppercase(va_list args);
+
+/* _printf - custom printf */
 int _printf(const char *format, ...);
 
 #endif /* MAIN_H */
