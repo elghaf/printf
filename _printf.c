@@ -48,7 +48,7 @@ int print_string(const char *str)
  * Return: Total number of characters printed
  */
 
-int process_format(const char *format, va_list args)
+int process_format_of_string(const char *format, va_list args)
 {
 	int total_count = 0;
 	char c;
@@ -113,7 +113,7 @@ int _printf(const char *format, ...)
 		return (-1);
 	}
 
-	total_count = process_format(format, args);
+	total_count = process_format_of_string(format, args);
 
 	va_end(args);
 	return (total_count);
