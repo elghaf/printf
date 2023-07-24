@@ -2,106 +2,75 @@
 #include "main.h"
 
 /**
- * print_char - Prints one character.
- * @c: The character to be printed.
- * Return: Number of characters printed (always 1)
+ * _putchar - Writes a character to stdout.
+ * @c: The character to be written.
+ *
+ * Return: On success, 1. On error, -1 is returned and errno is set appropriately.
  */
-
-int print_char(char c)
+int _putchar(char c)
 {
-	char character;
-
-	character = c;
-	_putchar(character);
-	return (1);
+	return (write(1, &c, 1));
 }
 
 /**
- * _printf - Prints a formatted string to the standard output.
- * @format: A pointer to a character string.
+ * _printf - Custom implementation of printf.
+ * @format: The format string containing zero or more directives.
  *
- * Return: The number of characters printed.
+ * Return: The number of characters printed (excluding the null byte).
  */
 int _printf(const char *format, ...)
 {
-	va_list argument;
-	int total_counts = 0, digit, sign, len = 0, num, i;
-	char buffer[20];
-	char c;
-	char *s;
+	va_list args;
+	int count = 0;
+	char ch;
 
-	if (format == NULL)
-		return (-1);
-	if (!format || (format[0] == '%' && !format[1]))
-		return (-1);
-	if (format[0] == '%' && format[1] == ' ' && !format[2])
-		return (-1);
+	va_start(args, format);
 
-	va_start(argument, format);
+	while ((ch = *format++) != '\0')
+	{
+		if (ch != '%')
+		{
+			_putchar(ch);
+			count++;
+		}
+		else
+		{
+			ch = *format++;
+			switch (ch)
+			{
+				case 'c':
+					count += print_char(args);
+					break;
+				case 's':
+					count += print_string(args);
+					break;
+				case '%':
+					_putchar('%');
+					count++;
+					break;
+				case 'd':
+				case 'i':
+					count += print_int(args);
+					break;
+				case 'u':
+					count += print_unsigned(args);
+					break;
+				case 'o':
+					count += print_octal(args);
+					break;
+				case 'x':
+					count += print_hex(args);
+					break;
+				case 'X':
+					count += print_hex_upper(args);
+					break;
+				default:
+					break;
+			}
+		}
+	}
 
-
-
-while (*format != '\0') {
-    if (*format == '%') {
-        format++;
-        switch (*format) {
-            case '%':
-                print_char('%');
-                total_counts++;
-                break;
-            case 'c':
-                c = va_arg(argument, int);
-                print_char(c);
-                total_counts++;
-                break;
-            case 's': {
-                s = va_arg(argument, char *);
-                while (*s != '\0') {
-                    print_char(*s);
-                    total_counts++;
-                    s++;
-                }
-                break;
-            }
-            case 'd':
-            case 'i': {
-                num = va_arg(argument, int);
-                sign = 1;
-                if (num < 0) {
-                    sign = -1;
-                    num = -num;
-                }
-                len = 0;
-                do {
-                    digit = num % 10;
-                    buffer[len] = digit + '0';
-                    len++;
-                    num /= 10;
-                } while (num > 0);
-
-                if (sign == -1) {
-                    print_char('-');
-                    total_counts++;
-                }
-
-                for ( i = len - 1; i >= 0; i--) {
-                    print_char(buffer[i]);
-                    total_counts++;
-                }
-                break;
-            }
-            default:
-                break;
-        }
-        format++;
-    } else {
-        print_char(*format);
-        total_counts++;
-        format++;
-    }
+	va_end(args);
+	return count;
 }
 
-	va_end(argument);
-
-	return (total_counts);
-}
