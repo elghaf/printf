@@ -50,17 +50,50 @@ int print_string(const char *str)
 
 int process_format(const char *format, va_list args)
 {
-	int total_count = 0;
-	char c;
+	int total_count = 0, i;
+	char character;
+	char buffer[20];
+				va_list ap;
+				int digit, count = 0, digit, sign, len, num, i;
+				char buffer[20];
+				char c;
+				char *s;                
 
-	while ((c = *format))
+	while ((character = *format))
 	{
-		if (c == '%')
+		if (character == '%')
 		{
 			format++;
 
 			switch (*format)
 			{
+			case 'd':
+            case 'i': {
+				num = va_arg(args, int);
+				sign = 1;
+                if (num < 0) {
+                    sign = -1;
+                    num = -num;
+                }
+				do {
+                    digit = num % 10;
+                    buffer[len] = digit + '0';
+                    len++;
+                    num /= 10;
+                } while (num > 0);
+
+                if (sign == -1) {
+                    m_putchars('-');
+                    count++;
+                }
+
+                for (i = len - 1; i >= 0; i--) {
+                    m_putchars(buffer[i]);
+                    count++;
+                }
+				total_count = count;
+                break;
+            }
 				case '%':
 					m_putchars('%');
 					total_count++;
@@ -99,20 +132,33 @@ int _printf(const char *format, ...)
 	va_list args;
 	int total_count;
 
-	va_start(args, format);
-
 	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
 	{
 		va_end(args);
 		return (-1);
 	}
-
+	if (format == NULL)
+	{
+		va_end(args);
+		return (-1);
+	}
+		
+	if (!format || (format[0] == '%' && !format[1]))
+	{
+		va_end(args);
+		return (-1);
+	}
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+	{
+		va_end(args);
+		return (-1);
+	}
 	if (strcmp(format, "% ") == 0 || strcmp(format, "%") == 0)
 	{
 		va_end(args);
 		return (-1);
 	}
-
+	va_start(args, format);
 	total_count = process_format(format, args);
 
 	va_end(args);

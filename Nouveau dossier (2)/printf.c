@@ -2,6 +2,21 @@
 #include "main.h"
 
 /**
+ * print_char - Prints a single character
+ * @c: The character to be printed
+ * Return: Number of characters printed (always 1)
+ */
+
+int print_char(char c)
+{
+	char character;
+
+	character = c;
+	m_putchars(character);
+	return (1);
+}
+
+/**
  * _printf - Prints a formatted string to the standard output.
  * @format: A pointer to a character string.
  *
