@@ -1,120 +1,108 @@
+#include <stdio.h>
 #include <stdarg.h>
-#include "main.h"
-#include <string.h>
 
-/**
- * print_char - Prints a single character
- * @c: The character to be printed
- * Return: Number of characters printed (always 1)
- */
-
-int print_char(char c)
+int _putchar(char c)
 {
-	char character;
-
-	character = c;
-	m_putchars(character);
-	return (1);
+    return write(1, &c, 1);
 }
-
-/**
- * print_string - Prints a string
- * @str: The string to be printed
- * Return: Number of characters printed
- */
-
-int print_string(const char *str)
-{
-	int index = 0, len_of_our_string;
-
-	if (str == NULL)
-		str = "(null)";
-
-	len_of_our_string = strlen(str);
-	while (index < len_of_our_string)
-	{
-		/* code */
-		m_putchars(str[index]);
-		index++;
-	}
-
-	return (len_of_our_string);
-}
-
-/**
- * process_format - Processes the format string and prints accordingly
- * @format: The format string
- * @args: The va_list containing arguments
- * Return: Total number of characters printed
- */
-
-int process_format_of_string(const char *format, va_list args)
-{
-	int total_count = 0;
-	char c;
-
-	while ((c = *format))
-	{
-		if (c == '%')
-		{
-			format++;
-
-			switch (*format)
-			{
-				case '%':
-					m_putchars('%');
-					total_count++;
-					break;
-				case 'c':
-					total_count += print_char(va_arg(args, int));
-					break;
-				case 's':
-					total_count += print_string(va_arg(args, const char *));
-					break;
-				default:
-					m_putchars('%');
-					m_putchars(*format);
-					total_count += 2;
-					break;
-			}
-		}
-		else
-		{
-			m_putchars(c);
-			total_count++;
-		}
-		format++;
-	}
-	return (total_count);
-}
-
-/**
- * _printf - Prints formatted output
- * @format: The format string
- * Return: Number of characters printed
- */
 
 int _printf(const char *format, ...)
 {
-	va_list args;
-	int total_count;
+    va_list args;
+    int count = 0;
 
-	va_start(args, format);
+    va_start(args, format);
 
-	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
-	{
-		va_end(args);
-		return (-1);
-	}
+    while (*format)
+    {
+        if (*format != '%')
+        {
+            _putchar(*format);
+            count++;
+        }
+        else
+        {
+            format++; // Move past the '%'
+            if (*format == '\0') // If '%' is the last character, stop
+                break;
 
-	if (strcmp(format, "% ") == 0 || strcmp(format, "%") == 0)
-	{
-		va_end(args);
-		return (-1);
-	}
+            if (*format == '%') // Print a literal '%'
+            {
+                _putchar('%');
+                count++;
+            }
+            else if (*format == 'c') // Print a character
+            {
+                char c = (char)va_arg(args, int);
+                _putchar(c);
+                count++;
+            }
+            else if (*format == 's') // Print a string
+            {
+                char *str = va_arg(args, char *);
+                if (str == NULL)
+                    str = "(null)";
 
-	total_count = process_format_of_string(format, args);
+                while (*str)
+                {
+                    _putchar(*str);
+                    str++;
+                    count++;
+                }
+            }
+            else if (*format == 'd' || *format == 'i') // Print a decimal integer
+            {
+                int num = va_arg(args, int);
+                int temp = num;
+                int digits = 0;
 
-	va_end(args);
-	return (total_count);
+                if (num == 0) // Special case for 0
+                {
+                    _putchar('0');
+                    count++;
+                }
+                else if (num < 0) // Handle negative numbers
+                {
+                    _putchar('-');
+                    count++;
+
+                    // Convert negative number to positive for easier handling
+                    num = -num;
+                    temp = num;
+                }
+
+                // Count the number of digits in the integer
+                while (temp > 0)
+                {
+                    temp /= 10;
+                    digits++;
+                }
+
+                // Print each digit of the integer
+                for (int i = 0; i < digits; i++)
+                {
+                    int divisor = 1;
+                    for (int j = i + 1; j < digits; j++)
+                        divisor *= 10;
+
+                    int digit = num / divisor;
+                    _putchar('0' + digit);
+                    count++;
+
+                    num %= divisor;
+                }
+            }
+            else // Unsupported specifier, print it as is
+            {
+                _putchar('%');
+                _putchar(*format);
+                count += 2;
+            }
+        }
+
+        format++; // Move to the next character
+    }
+
+    va_end(args);
+    return count;
 }
