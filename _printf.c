@@ -1,6 +1,5 @@
 #include <stdarg.h>
 #include "main.h"
-#include <string.h>
 
 /**
  * print_char - Prints a single character
@@ -18,148 +17,94 @@ int print_char(char c)
 }
 
 /**
- * print_string - Prints a string
- * @str: The string to be printed
- * Return: Number of characters printed
+ * _printf - Prints a formatted string to the standard output.
+ * @format: A pointer to a character string.
+ *
+ * Return: The number of characters printed.
  */
-
-int print_string(const char *str)
+int _printf(const char *format, ...)
 {
-	int index = 0, len_of_our_string;
-
-	if (str == NULL)
-		str = "(null)";
-
-	len_of_our_string = strlen(str);
-	while (index < len_of_our_string)
-	{
-		/* code */
-		_putchar(str[index]);
-		index++;
-	}
-
-	return (len_of_our_string);
-}
-
-/**
- * process_format - Processes the format string and prints accordingly
- * @format: The format string
- * @args: The va_list containing arguments
- * Return: Total number of characters printed
- */
-
-int process_format(const char *format, va_list args)
-{
-	int total_count = 0, i;
-	char character;
+	va_list ap;
+	int count = 0, digit, sign, len, num, i;
 	char buffer[20];
-				int digit, count = 0, sign, len, num, i;
-				char buffer[20];
-				char c;
-				char *s;                
+	char c;
+	char *s;
 
-	while ((character = *format))
+	if (format == NULL)
+		return (-1);
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+
+	va_start(ap, format);
+
+	while (*format != '\0')
 	{
-		if (character == '%')
+		if (*format == '%')
 		{
 			format++;
-
-			switch (*format)
+			if (*format == '%')
 			{
-			case 'd':
-            case 'i': {
-				num = va_arg(args, int);
-				sign = 1;
-                if (num < 0) {
-                    sign = -1;
-                    num = -num;
-                }
-				do {
-                    digit = num % 10;
-                    buffer[len] = digit + '0';
-                    len++;
-                    num /= 10;
-                } while (num > 0);
-
-                if (sign == -1) {
-                    _putchar('-');
-                    count++;
-                }
-
-                for (i = len - 1; i >= 0; i--) {
-                    _putchar(buffer[i]);
-                    count++;
-                }
-				total_count = count;
-                break;
-            }
-				case '%':
-					_putchar('%');
-					total_count++;
-					break;
-				case 'c':
-					total_count += print_char(va_arg(args, int));
-					break;
-				case 's':
-					total_count += print_string(va_arg(args, const char *));
-					break;
-				default:
-					_putchar('%');
-					_putchar(*format);
-					total_count += 2;
-					break;
+				print_char('%');
+				count++;
 			}
+			else if (*format == 'c')
+			{
+				c = (char) va_arg(ap, int);
+				print_char(c);
+				count++;
+			}
+			else if (*format == 's')
+			{
+				s = va_arg(ap, char *);
+				while (*s != '\0')
+				{
+					print_char(*s);
+					count++;
+					s++;
+				}
+			}
+			else if (*format == 'd' || *format == 'i')
+			{
+				num = va_arg(ap, int);
+				sign = 1;
+				if (num < 0)
+				{
+					sign = -1;
+					num = -num;
+				}
+				len = 0;
+				do {
+					digit = num % 10;
+					buffer[len] = digit + '0';
+					len++;
+					num /= 10;
+				} while (num > 0);
+
+				if (sign == -1)
+				{
+					print_char('-');
+					count++;
+				}
+
+				for (i = len - 1; i >= 0; i--)
+				{
+					print_char(buffer[i]);
+					count++;
+				}
+			}
+			format++;
 		}
 		else
 		{
-			_putchar(c);
-			total_count++;
+			print_char(*format);
+			count++;
+			format++;
 		}
-		format++;
 	}
-	return (total_count);
-}
 
-/**
- * _printf - Prints formatted output
- * @format: The format string
- * Return: Number of characters printed
- */
+	va_end(ap);
 
-int _printf(const char *format, ...)
-{
-	va_list args;
-	int total_count;
-
-	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
-	{
-		va_end(args);
-		return (-1);
-	}
-	if (format == NULL)
-	{
-		va_end(args);
-		return (-1);
-	}
-		
-	if (!format || (format[0] == '%' && !format[1]))
-	{
-		va_end(args);
-		return (-1);
-	}
-	if (format[0] == '%' && format[1] == ' ' && !format[2])
-	{
-		va_end(args);
-		return (-1);
-	}
-	if (strcmp(format, "% ") == 0 || strcmp(format, "%") == 0)
-	{
-		va_end(args);
-		return (-1);
-	}
-	va_start(args, format);
-	total_count = process_format(format, args);
-
-	va_end(args);
-	return (total_count);
+	return (count);
 }

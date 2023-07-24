@@ -12,7 +12,7 @@ int print_char(char c)
 	char character;
 
 	character = c;
-	m_putchars(character);
+	_putchars(character);
 	return (1);
 }
 
