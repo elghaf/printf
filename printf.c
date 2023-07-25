@@ -95,7 +95,7 @@ int helper(int *count, const char *format, va_list args)
 int _printf(const char *format, ...)
 {
 	va_list arguments;
-	int index_counter = 0, i;
+	int index_counter = 0;
 
 	if (format == NULL)
 	{
@@ -106,8 +106,7 @@ int _printf(const char *format, ...)
 	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
 	va_start(arguments, format);
-
-	for (i = 0; *format; format++)
+	for (; *format; format++)
 	{
 		if (*format == '%')
 		{
