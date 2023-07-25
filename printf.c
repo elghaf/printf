@@ -42,7 +42,7 @@ int print_string(const char *str)
  * Return: return -1 otherwise no return
  */
 
-int need_function(int *count, const char *format, va_list args)
+int helper(int *count, const char *format, va_list args)
 {
 	char *str;
 	char ch, percent = '%';
@@ -112,7 +112,7 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			need_function(&index_counter, format, arguments);
+			helper(&index_counter, format, arguments);
 		}
 		else
 		{
