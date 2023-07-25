@@ -67,7 +67,7 @@ int helper(int *count, const char *format, va_list args)
 	}
 	else if (*format == 'd' || *format == 'i')
 	{
-		int num = va_arg(args, int);
+		int integer_nb = va_arg(args, int);
 		char sign = 0;
 		char space = 0;
 
@@ -76,7 +76,7 @@ int helper(int *count, const char *format, va_list args)
 		{
 			sign = !(*format == '+') ? 0 : 1;
 		}
-		*count += print_int(num, sign, space);
+		*count += print_int(integer_nb, sign, space);
 	}
 	else
 	{
