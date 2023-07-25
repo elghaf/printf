@@ -33,7 +33,7 @@ int print_string(va_list args)
 	while (index < len_of_our_string)
 	{
 		/* code */
-		m_putchars(str[index]);
+		_putchar(str[index]);
 		index++;
 	}
 
