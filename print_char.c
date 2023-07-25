@@ -1,7 +1,8 @@
-#include <unistd.h>
-#include <stdio.h>
 #include <stdarg.h>
+#include <unistd.h>
+#include <limits.h>
 #include "main.h"
+
 
 /**
  * print_char - This function prints character
