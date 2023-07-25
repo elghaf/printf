@@ -69,14 +69,14 @@ int helper(int *count, const char *format, va_list args)
 	{
 		int integer_nb = va_arg(args, int);
 		char neg_pos = 0;
-		char space = 0;
+		char integer_space = 0;
 
 		format--;
 		while (*++format == '+' || *format == ' ')
 		{
 			neg_pos = !(*format == '+') ? 0 : 1;
 		}
-		*count += print_int(integer_nb, neg_pos, space);
+		*count += print_int(integer_nb, neg_pos, integer_space);
 	}
 	else
 	{
