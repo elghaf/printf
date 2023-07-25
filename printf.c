@@ -88,10 +88,10 @@ int helper(int *count, const char *format, va_list args)
 
 /**
  * _printf - This fuction prints the printf functionality
- * @format: Represents the pointer to the string
- *@...: any other arguments
+ * @format: Represents the pointer to the string format.
+ *@...: any other arguments.
  *
- * Return: return the number of words outputed
+ * Return: return the number of string.
  */
 int _printf(const char *format, ...)
 {
