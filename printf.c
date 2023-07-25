@@ -106,8 +106,9 @@ int _printf(const char *format, ...)
 	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
 	va_start(arguments, format);
-	for (; *format; format++)
+	do
 	{
+		/* code */
 		if (*format == '%')
 		{
 			format++;
@@ -117,7 +118,9 @@ int _printf(const char *format, ...)
 		{
 			index_counter += write(1, format, 1);
 		}
-	}
+	format++;
+	} while (*format);
+	
 	va_end(arguments);
 	return (index_counter);
 }
