@@ -38,15 +38,15 @@ int _printf(const char *format, ...)
 			current_char = *format++;
 			switch (current_char)
 			{
+				case '%':
+				_putchar('%');
+				character_count++;
+				break;
 				case 'c':
 					character_count += print_single_char(arguments);
 					break;
 				case 's':
 					character_count += print_string(arguments);
-					break;
-				case '%':
-					_putchar('%');
-					character_count++;
 					break;
 				case 'd':
 				case 'i':

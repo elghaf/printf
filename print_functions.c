@@ -24,15 +24,20 @@ int print_single_char(va_list args)
 int print_string(va_list args)
 {
 	const char *str = va_arg(args, const char *);
-	int character_count = 0;
+	int index = 0, len_of_our_string;
 
-	while (*str)
+	if (str == NULL)
+		str = "(null)";
+
+	len_of_our_string = strlen(str);
+	while (index < len_of_our_string)
 	{
-		_putchar(*str++);
-		character_count++;
+		/* code */
+		m_putchars(str[index]);
+		index++;
 	}
 
-	return (character_count);
+	return (len_of_our_string);
 }
 
 /**
