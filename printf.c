@@ -45,7 +45,7 @@ int print_string(const char *str)
 int helper(int *count, const char *format, va_list args)
 {
 	char *str;
-	char characters, percent = '%';
+	char characters, ch = '%';
 
 	if (*format == '\0')
 	{
@@ -63,7 +63,7 @@ int helper(int *count, const char *format, va_list args)
 	}
 	else if (*format == '%')
 	{
-		*count += write(1, &percent, 1);
+		*count += write(1, &ch, 1);
 	}
 	else if (*format == 'd' || *format == 'i')
 	{
