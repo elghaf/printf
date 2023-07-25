@@ -42,10 +42,10 @@ int print_string(const char *str)
  * Return: return -1 otherwise no return
  */
 
-int helper(int *index_counter, const char *format, va_list args)
+int helper(int *count, const char *format, va_list args)
 {
-	char *string_condition;
-	char characters, percent = '%';
+	char *str;
+	char ch, percent = '%';
 
 	if (*format == '\0')
 	{
@@ -53,17 +53,17 @@ int helper(int *index_counter, const char *format, va_list args)
 	}
 	else if (*format == 'c')
 	{
-		characters = va_arg(args, int);
-		*index_counter += print_char(characters);
+		ch = va_arg(args, int);
+		*count += print_char(ch);
 	}
 	else if (*format == 's')
 	{
-		string_condition = va_arg(args, char*);
-		*index_counter += print_string(string_condition);
+		str = va_arg(args, char*);
+		*count += print_string(str);
 	}
 	else if (*format == '%')
 	{
-		*index_counter += write(1, &percent, 1);
+		*count += write(1, &percent, 1);
 	}
 	else if (*format == 'd' || *format == 'i')
 	{
@@ -76,12 +76,12 @@ int helper(int *index_counter, const char *format, va_list args)
 		{
 			sign = !(*format == '+') ? 0 : 1;
 		}
-		*index_counter += print_int(num, sign, space);
+		*count += print_int(num, sign, space);
 	}
 	else
 	{
-		*index_counter += write(1, "%", 1);
-		*index_counter += write(1, format, 1);
+		*count += write(1, "%", 1);
+		*count += write(1, format, 1);
 	}
 	return (0);
 }
