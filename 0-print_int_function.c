@@ -16,6 +16,10 @@ int print_int(int integer_print, char neg_pos, char integer_space)
 	int index_counter = 0;
 	char buffer[12];
 	int len = 0;
+	char minus_sign = '-';
+	char plus_sign = '+';
+	char space_char = ' ';
+	char zero_char = '0';
 
 	if (integer_print == INT_MIN)
 	{
@@ -25,27 +29,29 @@ int print_int(int integer_print, char neg_pos, char integer_space)
 
 	if (integer_print < 0)
 	{
-		index_counter += write(1, "-", 1);
-		integer_print = -integer_print;
-	} else if (neg_pos)
+	    index_counter += write(1, &minus_sign, 1);
+	    integer_print = -integer_print;
+	}
+	else if (neg_pos)
 	{
-		index_counter += write(1, "+", 1);
-	} else if (integer_space)
+	    index_counter += write(1, &plus_sign, 1);
+	}
+	else if (integer_space)
 	{
-		index_counter += write(1, " ", 1);
+	    index_counter += write(1, &space_char, 1);
 	}
 	else if (integer_print == 0)
 	{
-		index_counter += write(1, "0", 1);
-		return (index_counter);
+	    index_counter += write(1, &zero_char, 1);
+	    return index_counter;
 	}
-	while (integer_print > 0)
-	{
-		buffer[len++] = '0' + integer_print % 10;
-		integer_print /= 10;
-	}
-	while (len > 0)
-		index_counter += write(1, &buffer[--len], 1);
+		while (integer_print > 0)
+		{
+			buffer[len++] = '0' + integer_print % 10;
+			integer_print /= 10;
+		}
+		while (len > 0)
+			index_counter += write(1, &buffer[--len], 1);
 
-	return (index_counter);
+		return (index_counter);
 }
