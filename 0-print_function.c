@@ -51,6 +51,13 @@ int print_int(int num, char sign, char space)
 	return (count);
 }
 
+/**
+ * write_putchar - This function prints character
+ * @charac: The character itself
+ *
+ * Return: returns the character passed
+ */
+
 int write_putchar(int charac)
 {
 	return (write(1, &charac, 1));
