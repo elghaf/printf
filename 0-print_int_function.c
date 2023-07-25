@@ -19,7 +19,7 @@ int print_int(int integer_print, char neg_pos, char integer_space)
 
 	if (integer_print == INT_MIN)
 	{
-		index_counter += write(1, "-2147483648", 11);
+		index_counter += _putchar("-2147483648");
 		return (index_counter);
 	}
 	if (integer_print < 0)
