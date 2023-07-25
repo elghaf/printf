@@ -42,7 +42,7 @@ int print_string(const char *str)
  * Return: return -1 otherwise no return
  */
 
-int helper(int *count, const char *format, va_list args)
+int need_function(int *count, const char *format, va_list args)
 {
 	char *str;
 	char ch, percent = '%';
@@ -88,7 +88,7 @@ int helper(int *count, const char *format, va_list args)
 /**
  * _printf - Prints formatted output with printf functionality.
  * @format: A pointer to the format string containing the output specifications.
- * @...: arg to be printed.
+ * @...: Additional arguments to be formatted and printed.
  *
  * Return: The number of characters printed (excluding the null terminator).
  */
@@ -112,7 +112,7 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			helper(&index_counter, format, arguments);
+			need_function(&index_counter, format, arguments);
 		}
 		else
 		{
