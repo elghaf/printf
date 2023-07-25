@@ -35,14 +35,14 @@ int print_string(const char *str)
 }
 /**
  * helper - The function prints char and strings
- * @count: count number
+ * @index_c: count number
  * @format: This is the pointer to the string
  * @args: Represents the list of arguments
  *
  * Return: return -1 otherwise no return
  */
 
-int helper(int *count, const char *format, va_list args)
+int helper(int *index_c, const char *format, va_list args)
 {
 	char *str;
 	char characters, ch = '%';
@@ -54,16 +54,16 @@ int helper(int *count, const char *format, va_list args)
 	else if (*format == 'c')
 	{
 		characters = va_arg(args, int);
-		*count += print_char(characters);
+		*index_c += print_char(characters);
 	}
 	else if (*format == 's')
 	{
 		str = va_arg(args, char*);
-		*count += print_string(str);
+		*index_c += print_string(str);
 	}
 	else if (*format == '%')
 	{
-		*count += write(1, &ch, 1);
+		*index_c += write(1, &ch, 1);
 	}
 	else if (*format == 'd' || *format == 'i')
 	{
@@ -76,12 +76,12 @@ int helper(int *count, const char *format, va_list args)
 		{
 			neg_pos = !(*format == '+') ? 0 : 1;
 		}
-		*count += print_int(integer_nb, neg_pos, integer_space);
+		*index_c += print_int(integer_nb, neg_pos, integer_space);
 	}
 	else
 	{
-		*count += write(1, "%", 1);
-		*count += write(1, format, 1);
+		*index_c += write(1, "%", 1);
+		*index_c += write(1, format, 1);
 	}
 	return (0);
 }
