@@ -46,9 +46,6 @@ int helper(int *count, const char *format, va_list args)
 {
 	char *str;
 	char characters, percent = '%';
-	int integer_nb = va_arg(args, int);
-	char neg_pos = 0;
-	char integer_space = 0;
 
 	if (*format == '\0')
 	{
@@ -70,6 +67,10 @@ int helper(int *count, const char *format, va_list args)
 	}
 	else if (*format == 'd' || *format == 'i')
 	{
+	int integer_nb = va_arg(args, int);
+	char neg_pos = 0;
+	char integer_space = 0;
+
 		format--;
 		while (*++format == '+' || *format == ' ')
 		{
