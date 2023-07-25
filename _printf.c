@@ -1,5 +1,6 @@
 #include <stdarg.h>
 #include "main.h"
+#include <string.h>
 
 /**
  * print_char - Prints a single character
@@ -12,99 +13,108 @@ int print_char(char c)
 	char character;
 
 	character = c;
-	_putchars(character);
+	m_putchars(character);
 	return (1);
 }
 
 /**
- * _printf - Prints a formatted string to the standard output.
- * @format: A pointer to a character string.
- *
- * Return: The number of characters printed.
+ * print_string - Prints a string
+ * @str: The string to be printed
+ * Return: Number of characters printed
  */
-int _printf(const char *format, ...)
+
+int print_string(const char *str)
 {
-	va_list ap;
-	int count = 0, digit, sign, len, num, i;
-	char buffer[20];
-	char c;
-	char *s;
+	int index = 0, len_of_our_string;
 
-	if (format == NULL)
-		return (-1);
-	if (!format || (format[0] == '%' && !format[1]))
-		return (-1);
-	if (format[0] == '%' && format[1] == ' ' && !format[2])
-		return (-1);
+	if (str == NULL)
+		str = "(null)";
 
-	va_start(ap, format);
-
-	while (*format != '\0')
+	len_of_our_string = strlen(str);
+	while (index < len_of_our_string)
 	{
-		if (*format == '%')
+		/* code */
+		m_putchars(str[index]);
+		index++;
+	}
+
+	return (len_of_our_string);
+}
+
+/**
+ * process_format - Processes the format string and prints accordingly
+ * @format: The format string
+ * @args: The va_list containing arguments
+ * Return: Total number of characters printed
+ */
+
+int process_format(const char *format, va_list args)
+{
+	int total_count = 0;
+	char c;
+
+	while ((c = *format))
+	{
+		if (c == '%')
 		{
 			format++;
-			if (*format == '%')
-			{
-				_putchar('%');
-				count++;
-			}
-			else if (*format == 'c')
-			{
-				c = (char) va_arg(ap, int);
-				_putchar(c);
-				count++;
-			}
-			else if (*format == 's')
-			{
-				s = va_arg(ap, char *);
-				while (*s != '\0')
-				{
-					_putchar(*s);
-					count++;
-					s++;
-				}
-			}
-			else if (*format == 'd' || *format == 'i')
-			{
-				num = va_arg(ap, int);
-				sign = 1;
-				if (num < 0)
-				{
-					sign = -1;
-					num = -num;
-				}
-				len = 0;
-				do {
-					digit = num % 10;
-					buffer[len] = digit + '0';
-					len++;
-					num /= 10;
-				} while (num > 0);
 
-				if (sign == -1)
-				{
-					_putchar('-');
-					count++;
-				}
-
-				for (i = len - 1; i >= 0; i--)
-				{
-					_putchar(buffer[i]);
-					count++;
-				}
+			switch (*format)
+			{
+				case '%':
+					m_putchars('%');
+					total_count++;
+					break;
+				case 'c':
+					total_count += print_char(va_arg(args, int));
+					break;
+				case 's':
+					total_count += print_string(va_arg(args, const char *));
+					break;
+				default:
+					m_putchars('%');
+					m_putchars(*format);
+					total_count += 2;
+					break;
 			}
-			format++;
 		}
 		else
 		{
-			_putchar(*format);
-			count++;
-			format++;
+			m_putchars(c);
+			total_count++;
 		}
+		format++;
+	}
+	return (total_count);
+}
+
+/**
+ * _printf - Prints formatted output
+ * @format: The format string
+ * Return: Number of characters printed
+ */
+
+int _printf(const char *format, ...)
+{
+	va_list args;
+	int total_count;
+
+	va_start(args, format);
+
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+	{
+		va_end(args);
+		return (-1);
 	}
 
-	va_end(ap);
+	if (strcmp(format, "% ") == 0 || strcmp(format, "%") == 0)
+	{
+		va_end(args);
+		return (-1);
+	}
 
-	return (count);
+	total_count = process_format(format, args);
+
+	va_end(args);
+	return (total_count);
 }
