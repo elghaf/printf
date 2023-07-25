@@ -113,7 +113,7 @@ int process_format(const char *format, va_list args)
 					break;
 				case 'd':
 				case 'i':
-					character_count += print_integer(va_arg(args, int));
+					total_count += print_integer(va_arg(args, int));
 					break;
 				default:
 					m_putchars('%');
