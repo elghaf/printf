@@ -47,36 +47,40 @@ int helper(int *count, const char *format, va_list args)
 	char *str;
 	char ch, percent = '%';
 
-	switch (*format)
+	if (*format == '\0')
 	{
-    case '\0':
-        return (-1);
-    case 'c':
-        ch = va_arg(args, int);
-        *count += print_char(ch);
-        break;
-	case 's':
-        str = va_arg(args, char*);
-        *count += print_string(str);
-        break;
-	case '%':
-        *count += write(1, &percent, 1);
-        break;
-    case 'd':
-    case 'i':
-        int num = va_arg(args, int);
-        char sign = 0;
-        char space = 0;
+		return (-1);
+	}
+	else if (*format == 'c')
+	{
+		ch = va_arg(args, int);
+		*count += print_char(ch);
+	}
+	else if (*format == 's')
+	{
+		str = va_arg(args, char*);
+		*count += print_string(str);
+	}
+	else if (*format == '%')
+	{
+		*count += write(1, &percent, 1);
+	}
+	else if (*format == 'd' || *format == 'i')
+	{
+		int num = va_arg(args, int);
+		char sign = 0;
+		char space = 0;
 
-        format--;
-        while (*++format == '+' || *format == ' ')
-            sign = (*format == '+') ? 1 : 0;
-        *count += print_int(num, sign, space);
-        break;
-    default:
-        *count += write(1, "%", 1);
-        *count += write(1, format, 1);
-        break;
+		format--;
+		while (*++format == '+' || *format == ' ')
+			sign = (*format == '+') ? 1 : 0;
+
+		*count += print_int(num, sign, space);
+	}
+	else
+	{
+		*count += write(1, "%", 1);
+		*count += write(1, format, 1);
 	}
 	return (0);
 }
