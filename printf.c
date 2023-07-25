@@ -4,24 +4,24 @@
 #include "main.h"
 
 /**
- * print_char - This function prints character
+ * print_character - This function prints character
  * @c: The character itself
  *
  * Return: returns the character passed
  */
 
-int print_char(int c)
+int print_character(int c)
 {
 	return (write(1, &c, 1));
 }
 /**
- * print_string - This fuction prints a string
+ * print_char_of_string - This fuction prints a string
  * @str: This is the pointer to the string
  *
  * Return: returns the formatted string
  */
 
-int print_string(const char *str)
+int print_char_of_string(const char *str)
 {
 	int len = 0;
 
@@ -54,12 +54,12 @@ int helper(int *index_c, const char *format, va_list args)
 	else if (*format == 'c')
 	{
 		characters = va_arg(args, int);
-		*index_c += print_char(characters);
+		*index_c += print_character(characters);
 	}
 	else if (*format == 's')
 	{
 		str = va_arg(args, char*);
-		*index_c += print_string(str);
+		*index_c += print_char_of_string(str);
 	}
 	else if (*format == '%')
 	{
