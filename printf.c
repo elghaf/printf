@@ -4,6 +4,36 @@
 #include "main.h"
 
 /**
+ * print_character - This function prints char C.
+ * @c: The character c.
+ *
+ * Return: returns the character.
+ */
+
+int print_character(int c)
+{
+	return (write(1, &c, 1));
+}
+/**
+ * print_char_of_string - This fuction prints char of str.
+ * @str_char: This is the pointer to the char str.
+ *
+ * Return: returns the formatted string
+ */
+
+int print_char_of_string(const char *str_char)
+{
+	int lengh_count = 0;
+
+	if (str_char == NULL)
+	{
+		return (write(1, "(null)", 6));
+	}
+	while (str_char[lengh_count])
+		lengh_count++;
+	return (write(1, str_char, lengh_count));
+}
+/**
  * helper - The function prints strings.
  * @index_c: count number
  * @format: This is the pointer to the string.
@@ -54,37 +84,6 @@ int helper(int *index_c, const char *format, va_list args)
 		*index_c += write(1, format, 1);
 	}
 	return (0);
-}
-
-/**
- * print_character - This function prints char C.
- * @c: The character c.
- *
- * Return: returns the character.
- */
-
-int print_character(int c)
-{
-	return (write(1, &c, 1));
-}
-/**
- * print_char_of_string - This fuction prints char of str.
- * @str_char: This is the pointer to the char str.
- *
- * Return: returns the formatted string
- */
-
-int print_char_of_string(const char *str_char)
-{
-	int lengh_count = 0;
-
-	if (str_char == NULL)
-	{
-		return (write(1, "(null)", 6));
-	}
-	while (str_char[lengh_count])
-		lengh_count++;
-	return (write(1, str_char, lengh_count));
 }
 
 /**
