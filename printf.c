@@ -15,23 +15,23 @@ int print_character(int c)
 	return (write(1, &c, 1));
 }
 /**
- * print_char_of_string - This fuction prints a string
- * @str: This is the pointer to the string
+ * print_char_of_string - This fuction prints char of str.
+ * @str_char: This is the pointer to the char str.
  *
  * Return: returns the formatted string
  */
 
-int print_char_of_string(const char *str)
+int print_char_of_string(const char *str_char)
 {
-	int len = 0;
+	int lengh_count = 0;
 
-	if (str == NULL)
+	if (str_char == NULL)
 	{
 		return (write(1, "(null)", 6));
 	}
-	while (str[len])
-		len++;
-	return (write(1, str, len));
+	while (str_char[lengh_count])
+		lengh_count++;
+	return (write(1, str_char, lengh_count));
 }
 /**
  * helper - The function prints strings.
