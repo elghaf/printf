@@ -16,7 +16,6 @@ int print_int(int integer_print, char neg_pos, char integer_space)
 	int index_counter = 0;
 	char buffer[12];
 	int len = 0;
-	char minus_sign = '-', plus_sign = '+', space_char = ' ' , zero_char = '0';
 
 	if (integer_print == INT_MIN)
 	{
