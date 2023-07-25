@@ -117,6 +117,7 @@ int _printf(const char *format, ...)
 		{
 			index_counter += write(1, format, 1);
 		}
+		format++;
 	}
 	va_end(arguments);
 	return (index_counter);
