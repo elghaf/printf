@@ -45,7 +45,7 @@ int print_int(int integer_print, char neg_pos, char integer_space)
 		integer_print /= 10;
 	}
 
-	while (len > 0);
+	while (len > 0)
 		index_counter += write(1, &buffer[--len], 1);
 
 	return (index_counter);
