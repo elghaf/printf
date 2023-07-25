@@ -3,41 +3,41 @@
 #include <limits.h>
 #include "main.h"
 /**
- * print_int - The function handles d and i specifiers
+ * print_int - The function print integer.
  *@num: The integer to be printed
  *@sign: The sign of the integer
  *@space: The space between the integer
  *
- *Return: Return count.
+ *Return: Return index_counter.
  */
 
 int print_int(int num, char sign, char space)
 {
-	int count = 0;
+	int index_counter = 0;
 	char buffer[12];
 	int len = 0;
 
 	if (num == INT_MIN)
 	{
-		count += write(1, "-2147483648", 11);
-		return (count);
+		index_counter += write(1, "-2147483648", 11);
+		return (index_counter);
 	}
 
 	if (num < 0)
 	{
-		count += write(1, "-", 1);
+		index_counter += write(1, "-", 1);
 		num = -num;
 	} else if (sign)
 	{
-		count += write(1, "+", 1);
+		index_counter += write(1, "+", 1);
 	} else if (space)
 	{
-		count += write(1, " ", 1);
+		index_counter += write(1, " ", 1);
 	}
 	else if (num == 0)
 	{
-		count += write(1, "0", 1);
-		return (count);
+		index_counter += write(1, "0", 1);
+		return (index_counter);
 	}
 
 	do {
@@ -46,7 +46,7 @@ int print_int(int num, char sign, char space)
 	} while (num > 0);
 
 	while (len > 0)
-		count += write(1, &buffer[--len], 1);
+		index_counter += write(1, &buffer[--len], 1);
 
-	return (count);
+	return (index_counter);
 }
