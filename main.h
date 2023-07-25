@@ -18,6 +18,5 @@ typedef struct convert conver_t;
 int _putchar(char c);
 int _printf(const char *format, ...);
 int helper(int *count, const char *format, va_list args);
-int print_int(int num, char sign, char space);
 
 #endif
