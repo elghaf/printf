@@ -4,10 +4,10 @@
 #include "main.h"
 
 /**
- * print_character - This function prints character
- * @c: The character itself
+ * print_character - This function prints char C.
+ * @c: The character c.
  *
- * Return: returns the character passed
+ * Return: returns the character.
  */
 
 int print_character(int c)
