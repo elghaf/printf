@@ -72,8 +72,10 @@ int helper(int *count, const char *format, va_list args)
 		char space = 0;
 
 		format--;
-		while (*++format == '+' || *format == ' ')
-			sign = (*format == '+') ? 1 : 0;
+		for (; *format == '+' || *format == ' '; ++format) 
+		{
+		    sign = (*format == '+') ? 1 : 0;
+		}
 
 		*count += print_int(num, sign, space);
 	}
