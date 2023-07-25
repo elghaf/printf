@@ -67,6 +67,7 @@ int helper(int *count, const char *format, va_list args)
         int num = va_arg(args, int);
         char sign = 0;
         char space = 0;
+
         format--;
         while (*++format == '+' || *format == ' ')
             sign = (*format == '+') ? 1 : 0;
