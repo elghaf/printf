@@ -41,6 +41,46 @@ int print_string(const char *str)
 	return (len_of_our_string);
 }
 
+
+/**
+ * print_integer - Print an integer
+ * @args: A va_list containing the integer to be printed
+ *
+ * Return: The number of characters printed
+ */
+int print_integer(int number)
+{
+	int is_negative = 0;
+	int character_count = 0;
+	int divisor = 1;
+	int temp = number;
+
+	if (number < 0)
+	{
+		_putchar('-');
+		character_count++;
+		is_negative = 1;
+		number = -number;
+	}
+
+	while (temp > 9)
+	{
+		divisor *= 10;
+		temp /= 10;
+	}
+
+	while (divisor > 0)
+	{
+		int digit = number / divisor;
+		_putchar('0' + digit);
+		character_count++;
+		number %= divisor;
+		divisor /= 10;
+	}
+
+	return (character_count + is_negative);
+}
+
 /**
  * process_format - Processes the format string and prints accordingly
  * @format: The format string
@@ -70,6 +110,10 @@ int process_format(const char *format, va_list args)
 					break;
 				case 's':
 					total_count += print_string(va_arg(args, const char *));
+					break;
+				case 'd':
+				case 'i':
+					character_count += print_integer(va_arg(args, int));
 					break;
 				default:
 					m_putchars('%');
