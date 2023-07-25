@@ -57,12 +57,12 @@ int need_function(int *index_counter, const char *format, va_list args)
 	else if (*format == 'c')
 	{
 		characters = va_arg(args, int);
-		*index_counter += print_char(characters);
+		*index_counter += character_to_print(characters);
 	}
 	else if (*format == 's')
 	{
 		str = va_arg(args, char*);
-		*index_counter += print_string(str);
+		*index_counter += string_to_print(str);
 	}
 	else if (*format == '%')
 	{
