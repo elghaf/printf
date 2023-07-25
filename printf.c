@@ -76,7 +76,7 @@ int helper(int *count, const char *format, va_list args)
         *count += write(1, "%", 1);
         *count += write(1, format, 1);
         break;
-
+	}
 	return (0);
 }
 
