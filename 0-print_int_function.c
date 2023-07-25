@@ -16,18 +16,15 @@ int print_int(int integer_print, char neg_pos, char integer_space)
 	int index_counter = 0;
 	char buffer[12];
 	int len = 0;
-    char *string_array[] = 
-	{
-		"-2147483648", 
-		"-",
-        "+",
-		" ",
-		"0"
-    };
+	char A=	"-2147483648", 
+	char B=	"-",
+    char C= "+",
+	char D=	" ",
+	char E=	"0"
 
 	if (integer_print == INT_MIN)
 	{
-		index_counter += write(1, string_array[0], 11);
+		index_counter += write(1, A, 11);
 		return (index_counter);
 	}
 
