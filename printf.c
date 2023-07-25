@@ -88,7 +88,7 @@ int helper(int *count, const char *format, va_list args)
 /**
  * _printf - Prints formatted output with printf functionality.
  * @format: A pointer to the format string containing the output specifications.
- * @...: Additional arguments to be formatted and printed.
+ * @...: arg to be printed.
  *
  * Return: The number of characters printed (excluding the null terminator).
  */
