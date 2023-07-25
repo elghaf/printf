@@ -4,42 +4,38 @@
 #include "main.h"
 
 /**
- * _printf - Prints formatted output to stdout.
- * @format: A pointer to the format string.
- * @...: Any arguments required by the format.
- * Return: On success, 
- * 	       the number of characters printed is returned.
- *         On error, a negative value is returned.
- **/
-
+ * _printf - This fuction prints the printf functionality
+ * @format: Represents the pointer to the string
+ *@...: any other arguments
+ *
+ * Return: return the number of words outputed
+ */
 int _printf(const char *format, ...)
 {
-	int index_counteur = 0;
-	va_list arguments;
+	va_list args;
+	int count = 0;
 
 	if (format == NULL)
 	{
 		return (-1);
 	}
-	if (format[0] == '%' && format[1] == ' ' && !format[2])
-		return (-1);
 	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
-
-	va_start(arguments, format);
-	while (*format)
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	va_start(args, format);
+	for (; *format; format++)
 	{
-	    if (*format == '%')
-	    {
-	        format++;
-	        prin_helper(&index_counteur, format, arguments);
-	    }
-	    else
-	    {
-	        index_counteur += _putchar(1, format, 1);
-	    }
-	    format++;
+		if (*format == '%')
+		{
+			format++;
+			helper(&count, format, args);
+		}
+		else
+		{
+			count += write(1, format, 1);
+		}
 	}
-	va_end(arguments);
-	return (index_counteur);
+	va_end(args);
+	return (count);
 }

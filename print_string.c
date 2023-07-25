@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include "main.h"
-
 /**
  * print_string - This fuction prints a string
  * @str: This is the pointer to the string
