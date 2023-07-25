@@ -1,9 +1,9 @@
 #ifndef MAIN_H
 #define MAIN_H
-#include <stdio.h>
 
+#include <stddef.h>
 
 int _printf(const char *format, ...);
-int _putchar(char c);
+int m_putchars(char c);
 
 #endif
