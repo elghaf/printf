@@ -39,7 +39,8 @@ int print_int(int integer_print, char neg_pos, char integer_space)
 		index_counter += write(1, "0", 1);
 		return (index_counter);
 	}
-	while (integer_print > 0){
+	while (integer_print > 0)
+	{
 		buffer[len++] = '0' + integer_print % 10;
 		integer_print /= 10;
 	}
