@@ -51,7 +51,7 @@ int print_int(int num, char sign, char space)
 	return (count);
 }
 
-int write_putchar(int character)
+int write_putchar(int charac)
 {
-	return (write(1, &c, 1));
+	return (write(1, &charac, 1));
 }
