@@ -85,8 +85,13 @@ int helper(int *count, const char *format, va_list args)
 	return (0);
 }
 
-
-
+/**
+ * _printf - This fuction prints the printf functionality
+ * @format: Represents the pointer to the string
+ *@...: any other arguments
+ *
+ * Return: return the number of words outputed
+ */
 int _printf(const char *format, ...)
 {
 	va_list arguments;
@@ -106,7 +111,7 @@ int _printf(const char *format, ...)
     {
         if (*format == '%')
         {
-            ptr++;
+            format++;
             helper(&index_counter, format, arguments);
         }
         else
