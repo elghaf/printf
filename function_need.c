@@ -51,8 +51,8 @@ int print_helper(int *count_ptr, const char *format, va_list args)
             break;
         }
         default:
-            *count_ptr += write(1, "%", 1);
-            *count_ptr += write(1, format, 1);
+            *count_ptr += _putchar(1, "%", 1);
+            *count_ptr += _putchar(1, format, 1);
             break;
     }
 
