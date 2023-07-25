@@ -3,12 +3,12 @@
 #include <limits.h>
 #include "main.h"
 /**
- * print_int - The function print integer.
- *@integer_print: The integer to be printed
- *@neg_pos: The negative or positve sign
- *@integer_space: the integer space
+ * print_int - The function prints an integer.
+ * @integer_print: The integer to be printed
+ * @neg_pos: The negative or positive sign ('-' for negative, '+' for positive)
+ * @integer_space: The integer space (number of digits)
  *
- *Return: Return index_counter.
+ * Return: The index_counter.
  */
 
 int print_int(int integer_print, char neg_pos, char integer_space)
