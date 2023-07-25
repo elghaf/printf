@@ -106,19 +106,18 @@ int _printf(const char *format, ...)
 	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
 	va_start(arguments, format);
-	while (*format)
-    {
-        if (*format == '%')
-        {
-            format++;
-            helper(&index_counter, format, arguments);
-        }
-        else
-        {
-            index_counter += write(1, format, 1);
-        }
-        format++;
-    }
+	for (; *format; format++)
+	{
+		if (*format == '%')
+		{
+			format++;
+			helper(&index_counter, format, arguments);
+		}
+		else
+		{
+			index_counter += write(1, format, 1);
+		}
+	}
 	va_end(arguments);
 	return (index_counter);
 }
