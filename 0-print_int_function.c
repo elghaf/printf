@@ -5,7 +5,7 @@
 /**
  * print_int - The function print integer.
  *@num: The integer to be printed
- *@sign: The sign of the integer
+ *@sign: The negative or positve sign
  *@space: The space between the integer
  *
  *Return: Return index_counter.
