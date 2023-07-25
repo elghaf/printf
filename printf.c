@@ -34,10 +34,10 @@ int print_string(const char *str)
 	return (write(1, str, len));
 }
 /**
- * helper - The function prints char and strings
+ * helper - The function prints strings.
  * @index_c: count number
- * @format: This is the pointer to the string
- * @args: Represents the list of arguments
+ * @format: This is the pointer to the string.
+ * @args: any arguments.
  *
  * Return: return -1 otherwise no return
  */
