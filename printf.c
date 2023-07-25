@@ -45,7 +45,7 @@ int print_string(const char *str)
 int helper(int *count, const char *format, va_list args)
 {
 	char *str;
-	char ch, percent = '%';
+	char characters, percent = '%';
 
 	if (*format == '\0')
 	{
@@ -53,8 +53,8 @@ int helper(int *count, const char *format, va_list args)
 	}
 	else if (*format == 'c')
 	{
-		ch = va_arg(args, int);
-		*count += print_char(ch);
+		characters = va_arg(args, int);
+		*count += print_char(characters);
 	}
 	else if (*format == 's')
 	{
