@@ -11,7 +11,7 @@
  */
 int _putchar(char c);
 int _printf(const char *format, ...);
-int need_function_formated(int *count, const char *format, va_list args);
+int need_func(int *count, const char *format, va_list args);
 int print_int(int integer_print, char neg_pos, char integer_space);
 
 #endif
