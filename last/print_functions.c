@@ -92,6 +92,7 @@ int print_unsigned_integer(va_list args)
 	unsigned int divisor = 1;
 	unsigned int temp = number;
 	int character_count = 0;
+	unsigned int  digit;
 
 	while (temp > 9)
 	{
@@ -101,7 +102,7 @@ int print_unsigned_integer(va_list args)
 
 	while (divisor > 0)
 	{
-		unsigned int digit = number / divisor;
+		digit = number / divisor;
 		_putchar('0' + digit);
 		character_count++;
 		number %= divisor;
@@ -162,6 +163,7 @@ int print_hexadecimal(va_list args)
 	char buffer[100];
 	int character_count = 0;
 	int i;
+	char digit;
 
 	if (number == 0)
 	{
@@ -178,7 +180,7 @@ int print_hexadecimal(va_list args)
 
 		for (i = hex_count - 1; i >= 0; i--)
 		{
-			char digit = buffer[i];
+			digit = buffer[i];
 			_putchar(digit);
 			character_count++;
 		}

@@ -2,74 +2,109 @@
 #include "main.h"
 
 /**
- * _putchar - Writes a character to stdout.
- * @c: The character to be written.
- *
- * Return: On success, 1. On error, -1 is returned and errno is set appropriately.
+ * print_char - Prints a single character
+ * @c: The character to be printed
+ * Return: Number of characters printed (always 1)
  */
-int _putchar(char c)
+
+int print_char(char c)
 {
-	return (write(1, &c, 1));
+	char character;
+
+	character = c;
+	_putchars(character);
+	return (1);
 }
 
 /**
- * _printf - Custom implementation of printf.
- * @format: The format string containing zero or more directives.
+ * _printf - Prints a formatted string to the standard output.
+ * @format: A pointer to a character string.
  *
- * Return: The number of characters printed (excluding the null byte).
+ * Return: The number of characters printed.
  */
 int _printf(const char *format, ...)
 {
-	va_list arguments;
-	int character_count = 0;
-	char current_char;
+	va_list ap;
+	int count = 0, digit, sign, len, num, i;
+	char buffer[20];
+	char c;
+	char *s;
 
-	va_start(arguments, format);
+	if (format == NULL)
+		return (-1);
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
 
-	while ((current_char = *format++) != '\0')
+	va_start(ap, format);
+
+	while (*format != '\0')
 	{
-		if (current_char != '%')
+		if (*format == '%')
 		{
-			_putchar(current_char);
-			character_count++;
+			format++;
+			if (*format == '%')
+			{
+				_putchar('%');
+				count++;
+			}
+			else if (*format == 'c')
+			{
+				c = (char) va_arg(ap, int);
+				_putchar(c);
+				count++;
+			}
+			else if (*format == 's')
+			{
+				s = va_arg(ap, char *);
+				while (*s != '\0')
+				{
+					_putchar(*s);
+					count++;
+					s++;
+				}
+			}
+			else if (*format == 'd' || *format == 'i')
+			{
+				num = va_arg(ap, int);
+				sign = 1;
+				if (num < 0)
+				{
+					sign = -1;
+					num = -num;
+				}
+				len = 0;
+				do {
+					digit = num % 10;
+					buffer[len] = digit + '0';
+					len++;
+					num /= 10;
+				} while (num > 0);
+
+				if (sign == -1)
+				{
+					_putchar('-');
+					count++;
+				}
+
+				for (i = len - 1; i >= 0; i--)
+				{
+					_putchar(buffer[i]);
+					count++;
+				}
+			}
+			format++;
 		}
 		else
 		{
-			current_char = *format++;
-			switch (current_char)
-			{
-				case '%':
-				_putchar('%');
-				character_count++;
-				break;
-				case 'c':
-					character_count += print_single_char(arguments);
-					break;
-				case 's':
-					character_count += print_string(arguments);
-					break;
-				case 'd':
-				case 'i':
-					character_count += print_integer(arguments);
-					break;
-				case 'u':
-					character_count += print_unsigned_integer(arguments);
-					break;
-				case 'o':
-					character_count += print_octal_integer(arguments);
-					break;
-				case 'x':
-					character_count += print_hexadecimal(arguments);
-					break;
-				case 'X':
-					character_count += print_hexadecimal_uppercase(arguments);
-					break;
-				default:
-					break;
-			}
+			_putchar(*format);
+			count++;
+			format++;
 		}
 	}
 
-	va_end(arguments);
-	return (character_count);
+	va_end(ap);
+
+	return (count);
 }
