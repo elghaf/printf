@@ -19,24 +19,24 @@ int print_int(int num, char sign, char space)
 
 	if (num == INT_MIN)
 	{
-		count += write_putchar(1, "-2147483648", 11);
+		count += _putchar("-2147483648");
 		return (count);
 	}
 
 	if (num < 0)
 	{
-		count += write_putchar(1, "-", 1);
+		count += _putchar("-");
 		num = -num;
 	} else if (sign)
 	{
-		count += write_putchar(1, "+", 1);
+		count += _putchar("+");
 	} else if (space)
 	{
-		count += write_putchar(1, " ", 1);
+		count += _putchar(" ");
 	}
 	else if (num == 0)
 	{
-		count += write_putchar(1, "0", 1);
+		count += _putchar("0");
 		return (count);
 	}
 
@@ -46,19 +46,7 @@ int print_int(int num, char sign, char space)
 	} while (num > 0);
 
 	while (len > 0)
-		count += write_putchar(1, &buffer[--len], 1);
+		count += _putchar(&buffer[--len]);
 
 	return (count);
-}
-
-/**
- * write_putchar - This function prints character
- * @charac: The character itself
- *
- * Return: returns the character passed
- */
-
-int write_putchar(int charac)
-{
-	return (write(1, &charac, 1));
 }
