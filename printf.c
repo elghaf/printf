@@ -96,7 +96,6 @@ int _printf(const char *format, ...)
 {
 	va_list arguments;
 	int index_counter = 0;
-	const char *condition = format;
 
 	if (format == NULL)
 	{
