@@ -48,8 +48,9 @@ int print_string(const char *str)
  *
  * Return: The number of characters printed
  */
-int print_integer(int number)
+int print_integer(va_list args)
 {
+	int number = va_arg(args, int);
 	int is_negative = 0;
 	int character_count = 0;
 	int divisor = 1;
@@ -113,7 +114,7 @@ int process_format(const char *format, va_list args)
 					break;
 				case 'd':
 				case 'i':
-					total_count += print_integer(va_arg(args, int));
+					total_count += print_integer(args);
 					break;
 				default:
 					m_putchars('%');
