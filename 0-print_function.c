@@ -19,24 +19,24 @@ int print_int(int num, char sign, char space)
 
 	if (num == INT_MIN)
 	{
-		count += write(1, "-2147483648", 11);
+		count += _putchar(1, "-2147483648", 11);
 		return (count);
 	}
 
 	if (num < 0)
 	{
-		count += write(1, "-", 1);
+		count += _putchar(1, "-", 1);
 		num = -num;
 	} else if (sign)
 	{
-		count += write(1, "+", 1);
+		count += _putchar(1, "+", 1);
 	} else if (space)
 	{
-		count += write(1, " ", 1);
+		count += _putchar(1, " ", 1);
 	}
 	else if (num == 0)
 	{
-		count += write(1, "0", 1);
+		count += _putchar(1, "0", 1);
 		return (count);
 	}
 
@@ -46,7 +46,7 @@ int print_int(int num, char sign, char space)
 	} while (num > 0);
 
 	while (len > 0)
-		count += write(1, &buffer[--len], 1);
+		count += _putchar(1, &buffer[--len], 1);
 
 	return (count);
 }
