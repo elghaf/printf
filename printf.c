@@ -68,15 +68,15 @@ int helper(int *count, const char *format, va_list args)
 	else if (*format == 'd' || *format == 'i')
 	{
 		int integer_nb = va_arg(args, int);
-		char sign = 0;
+		char neg_pos = 0;
 		char space = 0;
 
 		format--;
 		while (*++format == '+' || *format == ' ')
 		{
-			sign = !(*format == '+') ? 0 : 1;
+			neg_pos = !(*format == '+') ? 0 : 1;
 		}
-		*count += print_int(integer_nb, sign, space);
+		*count += print_int(integer_nb, neg_pos, space);
 	}
 	else
 	{
