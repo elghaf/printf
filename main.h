@@ -1,20 +1,14 @@
-#ifndef MY_PRINTF
-#define MY_PRINTF
+#ifndef PRINTF
+#define PRINTF
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
 #include <stdint.h>
 
-
-struct convert
-{
-	char *sym;
-	int (*f)(va_list);
-};
-typedef struct convert conver_t;
-
-
+/**
+ * the function that i created for this project.
+ */
 int _putchar(char c);
 int _printf(const char *format, ...);
 int helper(int *count, const char *format, va_list args);
