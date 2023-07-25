@@ -16,9 +16,10 @@ int print_int(int integer_print, char neg_pos, char integer_space)
 	int index_counter = 0;
 	char buffer[12];
 	int len = 0;
-    char *string_array[] = {
-        "-2147483648",
-        "-",
+    char *string_array[] = 
+	{
+		"-2147483648", 
+		"-",
         "+",
 		" ",
 		"0"
