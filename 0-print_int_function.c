@@ -40,13 +40,16 @@ int print_int(int integer_print, char neg_pos, char integer_space)
 		return (index_counter);
 	}
 
-	do {
+	while (integer_print > 0){
 		buffer[len++] = '0' + integer_print % 10;
 		integer_print /= 10;
-	} while (integer_print > 0);
+	}
 
-	while (len > 0)
+	do {
 		index_counter += write(1, &buffer[--len], 1);
+	}
+	while (len > 0);
+
 
 	return (index_counter);
 }
