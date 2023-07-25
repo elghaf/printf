@@ -48,40 +48,35 @@ int print_string(const char *str)
  *
  * Return: The number of characters printed
  */
-int print_integer(va_list args)
+int print_integer(int num)
 {
-	int number = va_arg(args, int);
-	int is_negative = 0;
-	int character_count = 0;
-	int divisor = 1;
-	int temp = number;
+	char buffer[20]; /*Assume that 20 charaters are enough for an int*/
+	int count = 0;
+	int i = sizeof(buffer) - 1;
 
-	if (number < 0)
+	if (num == 0)/*Handle Zero */
 	{
-		_putchar('-');
-		character_count++;
-		is_negative = 1;
-		number = -number;
+		buffer[0] = 48;
+		buffer[1] = 0;
+		count++;
+		write(1, buffer, 1);
+		return (count);
 	}
-
-	while (temp > 9)
+	if (num < 0)/*Handle Negative numbers */
 	{
-		divisor *= 10;
-		temp /= 10;
+		write(1, "-", 1);
+		count++;
+		num = -num;
 	}
-
-	while (divisor > 0)
-	{
-		int digit = number / divisor;
-		_putchar('0' + digit);
-		character_count++;
-		number %= divisor;
-		divisor /= 10;
-	}
-
-	return (character_count + is_negative);
+	buffer[i--] = 0;/*Converts the integer to a string(reversed)*/
+	do {
+		buffer[i--] = 48 + (num % 10);
+		num /= 10;
+		count++;
+	} while (num > 0);
+	write(1, buffer + i + 1, count);/*Write the string to the stdout */
+	return (count);
 }
-
 /**
  * process_format - Processes the format string and prints accordingly
  * @format: The format string
@@ -114,7 +109,7 @@ int process_format(const char *format, va_list args)
 					break;
 				case 'd':
 				case 'i':
-					total_count += print_integer(args);
+					total_count += print_integer(va_arg(args, int));
 					break;
 				default:
 					m_putchars('%');
