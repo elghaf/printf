@@ -3,52 +3,49 @@
 #include <stdarg.h>
 #include "main.h"
 
-
 /**
- * character_to_print - This function to prints character.
- * @character: The character.
+ * print_char - This function prints character
+ * @c: The character itself
  *
- * Return: returns the character to write.
+ * Return: returns the character passed
  */
 
-int character_to_print(int character)
+int print_char(int c)
 {
-	return (write(1, &character, 1));
+	return (write(1, &c, 1));
 }
-
 /**
- * string_to_print - This fuction to prints a str(string)
- * @string_pointer: the args pointer to the str(string)
+ * print_string - This fuction prints a string
+ * @str: This is the pointer to the string
  *
- * Return: returns the string.
+ * Return: returns the formatted string
  */
-int string_to_print(const char *string_pointer)
-{
-	int lengh_of_string = 0;
 
-	if (lengh_of_string == NULL)
+int print_string(const char *str)
+{
+	int len = 0;
+
+	if (str == NULL)
 	{
 		return (write(1, "(null)", 6));
 	}
-	while (string_pointer[lengh_of_string])
-		lengh_of_string++;
-	return (write(1, string_pointer, lengh_of_string));
+	while (str[len])
+		len++;
+	return (write(1, str, len));
 }
-
 /**
- * need_function - The function prints char and strings
- * @index_counter: count number
+ * helper - The function prints char and strings
+ * @count: count number
  * @format: This is the pointer to the string
  * @args: Represents the list of arguments
  *
  * Return: return -1 otherwise no return
  */
 
-int need_function(int *index_counter, const char *format, va_list args)
+int helper(int *count, const char *format, va_list args)
 {
 	char *str;
-	char characters;
-    char percentage = '%';
+	char ch, percent = '%';
 
 	if (*format == '\0')
 	{
@@ -56,17 +53,17 @@ int need_function(int *index_counter, const char *format, va_list args)
 	}
 	else if (*format == 'c')
 	{
-		characters = va_arg(args, int);
-		*index_counter += character_to_print(characters);
+		ch = va_arg(args, int);
+		*count += print_char(ch);
 	}
 	else if (*format == 's')
 	{
 		str = va_arg(args, char*);
-		*index_counter += string_to_print(str);
+		*count += print_string(str);
 	}
 	else if (*format == '%')
 	{
-		*index_counter += write(1, &percentage, 1);
+		*count += write(1, &percent, 1);
 	}
 	else if (*format == 'd' || *format == 'i')
 	{
@@ -78,16 +75,15 @@ int need_function(int *index_counter, const char *format, va_list args)
 		while (*++format == '+' || *format == ' ')
 			sign = (*format == '+') ? 1 : 0;
 
-		*index_counter += print_int(num, sign, space);
+		*count += print_int(num, sign, space);
 	}
 	else
 	{
-		*index_counter += write(1, "%", 1);
-		*index_counter += write(1, format, 1);
+		*count += write(1, "%", 1);
+		*count += write(1, format, 1);
 	}
 	return (0);
 }
-
 
 /**
  * _printf - This fuction prints the printf functionality
@@ -96,7 +92,6 @@ int need_function(int *index_counter, const char *format, va_list args)
  *
  * Return: return the number of words outputed
  */
-
 int _printf(const char *format, ...)
 {
 	va_list args;
@@ -116,7 +111,7 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
-			need_function(&count, format, args);
+			helper(&count, format, args);
 		}
 		else
 		{

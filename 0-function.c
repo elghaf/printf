@@ -1,7 +1,6 @@
 #include <stdarg.h>
 #include <unistd.h>
 #include <limits.h>
-#include <stdio.h>
 #include "main.h"
 /**
  * print_int - The function handles d and i specifiers
