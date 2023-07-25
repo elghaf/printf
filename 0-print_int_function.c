@@ -24,19 +24,18 @@ int print_int(int integer_print, char neg_pos, char integer_space)
 	}
 	if (integer_print < 0)
 	{
-		index_counter += _putchar("-");
+		index_counter += write(1, "-", 1);
 		integer_print = -integer_print;
 	} else if (neg_pos)
 	{
 		index_counter += write(1, "+", 1);
-	} else if (integer_space)
-	{
-		index_counter += write(1, " ", 1);
-	}
-	else if (integer_print == 0)
+	} else if (integer_print == 0)
 	{
 		index_counter += write(1, "0", 1);
 		return (index_counter);
+	} else if (integer_space)
+	{
+		index_counter += write(1, " ", 1);
 	}
 
 	while (integer_print > 0)
