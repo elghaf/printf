@@ -33,10 +33,8 @@ int print_char_of_string(const char *str_char)
 	}
 	while (str_char[lengh_count])
 		lengh_count++;
-	result = write(1, str_char, lengh_count);
 	return (write(1, str_char, lengh_count));
 }
-	
 /**
  * helper - The function prints strings.
  * @index_c: count number
