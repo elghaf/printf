@@ -16,7 +16,7 @@ int print_numbers(int integer_print, char neg_pos, char integer_space)
 {
 	int index_counter = 0;
 	int string_len = 0, i = 0;
-	char character[20], strr;
+	char character[20], strr[20];
 
 	if (integer_print == INT_MIN)
 	{
@@ -46,7 +46,7 @@ int print_numbers(int integer_print, char neg_pos, char integer_space)
 
 	while (integer_print > 0)
 	{
-		strr = '' + integer_print % 10;
+		strr = integer_print % 10;
 		character[string_len] = '0' + str;
 		integer_print = integer_print / 10;
 		i++;
