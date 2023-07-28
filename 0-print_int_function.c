@@ -26,6 +26,7 @@ int print_int(int integer_print, char neg_pos, char integer_space)
 	if (integer_print < 0)
 	{
 		index_counter = index_counter + write(1, "-", 1);
+		i++;
 		integer_print = -integer_print;
 	} else if (neg_pos)
 	{
@@ -43,9 +44,10 @@ int print_int(int integer_print, char neg_pos, char integer_space)
 	{
 		buffer[string_len] = '0' + integer_print % 10;
 		integer_print /= 10;
+		i++;
 		string_len++;
 	}
 	while (string_len > 0)
-		index_counter += write(1, &buffer[--string_len], 1);
+		index_counter = index_counter + write(1, &buffer[--string_len], 1);
 	return (index_counter);
 }
