@@ -48,7 +48,7 @@ int print_numbers(int integer_print, char neg_pos, char integer_space)
 	{
 		strr = '0';
 		character[string_len] = '0' + integer_print % 10;
-		integer_print = integer_print / 10;
+		integer_print /= 10;
 		i++;
 		string_len++;
 	}
