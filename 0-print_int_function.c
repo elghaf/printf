@@ -5,7 +5,7 @@
 
 /**
  * print_int - The function prints an integer.
- * @integer_print: The integer to be printed
+ * @integer_print: The numb integer that need to be printe.
  * @neg_pos: The negative or positive sign ('-' for negative, '+' for positive)
  * @integer_space: The integer space.
  *
