@@ -15,39 +15,41 @@
 int print_numbers(int integer_print, char neg_pos, char integer_space)
 {
 	int index_counter = 0;
+	int result_int;
 	int string_len = 0, i = 0;
 	char character[12];
 
-	if (integer_print == INT_MIN)
+	result_int = integer_print;
+	if (result_int == INT_MIN)
 	{
 		i++;
 		index_counter = index_counter + write(1, "-2147483648", 11);
 		return (index_counter);
 	}
-	if (integer_print < 0)
+	if (result_int < 0)
 	{
 		index_counter = index_counter + write(1, "-", 1);
 		i++;
-		integer_print = -integer_print;
+		result_int = -integer_print;
 	}
 	if (neg_pos)
 	{
 		index_counter = index_counter + write(1, "+", 1);
 	}
-	if (integer_print == 0)
+	if (result_int == 0)
 	{
 		index_counter = index_counter + write(1, "0", 1);
 		return (index_counter);
 	}
-	if (integer_space)
+	if (result_int)
 	{
 		index_counter = index_counter + write(1, " ", 1);
 	}
 
-	while (integer_print > 0)
+	while (result_int > 0)
 	{
-		character[string_len] = '0' + integer_print % 10;
-		integer_print = integer_print / 10;
+		character[string_len] = '0' + result_int % 10;
+		result_int = result_int / 10;
 		i++;
 		string_len++;
 	}
