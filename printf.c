@@ -12,7 +12,10 @@
 
 int print_character(int c)
 {
-	return (write(1, &c, 1));
+	int result;
+
+	result = write(1, &c, 1);
+	return (result);
 }
 /**
  * print_char_of_string - This fuction prints char of str.
