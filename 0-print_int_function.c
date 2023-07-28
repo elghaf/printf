@@ -29,14 +29,17 @@ int print_integer_space(int integer_print, char neg_pos, char integer_space)
 		index_counter = index_counter + write(1, "-", 1);
 		i++;
 		integer_print = -integer_print;
-	} else if (neg_pos)
+	}
+	if (neg_pos)
 	{
 		index_counter = index_counter + write(1, "+", 1);
-	} else if (integer_print == 0)
+	}
+	if (integer_print == 0)
 	{
 		index_counter = index_counter + write(1, "0", 1);
 		return (index_counter);
-	} else if (integer_space)
+	}
+	if (integer_space)
 	{
 		index_counter = index_counter + write(1, " ", 1);
 	}
