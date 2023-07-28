@@ -4,20 +4,6 @@
 #include "main.h"
 
 /**
- * print_character - This function prints char C.
- * @c: The character c.
- *
- * Return: returns the character.
- */
-
-int print_character(int c)
-{
-	int result;
-
-	result = write(1, &c, 1);
-	return (result);
-}
-/**
  * print_char_of_string - This fuction prints char of str.
  * @str_char: This is the pointer to the char str.
  *
@@ -37,6 +23,21 @@ int print_char_of_string(const char *str_char)
 	while (str_char[lengh_count])
 		lengh_count++;
 	return (write(1, str_char, lengh_count));
+}
+
+/**
+ * print_character - This function prints char C.
+ * @c: The character c.
+ *
+ * Return: returns the character.
+ */
+
+int print_character(int c)
+{
+	int result;
+
+	result = write(1, &c, 1);
+	return (result);
 }
 /**
  * helper - The function prints strings.
