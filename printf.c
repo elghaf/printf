@@ -78,6 +78,18 @@ int helper(int *index_c, const char *format, va_list args)
 	}
 	return (0);
 }
+/**
+ * print_character - This function prints char C.
+ * @c: The character c.
+ *
+ * Return: returns the character.
+ */
+
+int print_character(int c)
+{
+	return (write(1, &c, 1));
+}
+
 
 /**
  * _printf - This fuction prints the printf functionality
