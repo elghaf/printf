@@ -24,10 +24,12 @@ int print_character(int c)
 int print_char_of_string(const char *str_char)
 {
 	int lengh_count = 0;
+	int result;
 
 	if (str_char == NULL)
 	{
-		return (write(1, "(null)", 6));
+		result = write(1, "(null)", 6);
+		return (result);
 	}
 	while (str_char[lengh_count])
 		lengh_count++;
