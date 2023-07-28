@@ -28,7 +28,7 @@ int print_numbers(int integer_print, char neg_pos, char integer_space)
 	{
 		index_counter = index_counter + write(1, "-", 1);
 		i++;
-		integer_print = - (integer_print);
+		integer_print = -integer_print;
 	}
 	if (neg_pos)
 	{
