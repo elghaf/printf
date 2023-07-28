@@ -26,13 +26,13 @@ int print_char_of_string(const char *str_char)
 }
 
 /**
- * print_character - This function prints char C.
+ * print_character_C - This function prints char C.
  * @c: The character c.
  *
  * Return: returns the character.
  */
 
-int print_character(int c)
+int print_character_C(int c)
 {
 	int result;
 
@@ -60,7 +60,7 @@ int helper(int *index_c, const char *format, va_list args)
 	else if (*format == 'c')
 	{
 		characters = va_arg(args, int);
-		*index_c = *index_c + print_character(characters);
+		*index_c = *index_c + print_character_C(characters);
 	}
 	else if (*format == 's')
 	{
