@@ -68,15 +68,19 @@ int helper(int *index_c, const char *format, va_list args)
 	else if (*format == 'd' || *format == 'i')
 	{
 	int integer_nb = va_arg(args, int);
+	int j = 0;
+	int indexo = 0;
 	char neg_pos = 0;
 	char integer_space = 0;
 
 		format--;
 		while (*++format == '+' || *format == ' ')
 		{
+			j++;
 			neg_pos = !(*format == '+') ? 0 : 1;
 		}
 		*index_c += print_int(integer_nb, neg_pos, integer_space);
+		indexo++;
 	}
 	else
 	{
