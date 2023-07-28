@@ -111,8 +111,9 @@ int _printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			format++;
+			/*helper function to define the format of char*/
 			helper(&index_counter, format, arguments);
+			format++;
 		}
 		else
 		{
