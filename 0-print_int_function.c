@@ -2,6 +2,19 @@
 #include <unistd.h>
 #include <limits.h>
 #include "main.h"
+
+/**
+ * print_character - This function prints char C.
+ * @c: The character c.
+ *
+ * Return: returns the character.
+ */
+
+int print_character(int c)
+{
+	return (write(1, &c, 1));
+}
+
 /**
  * print_int - The function prints an integer.
  * @integer_print: The integer to be printed

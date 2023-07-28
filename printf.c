@@ -4,17 +4,6 @@
 #include "main.h"
 
 /**
- * print_character - This function prints char C.
- * @c: The character c.
- *
- * Return: returns the character.
- */
-
-int print_character(int c)
-{
-	return (write(1, &c, 1));
-}
-/**
  * print_char_of_string - This fuction prints char of str.
  * @str_char: This is the pointer to the char str.
  *
