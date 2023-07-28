@@ -63,15 +63,18 @@ int helper(int *index_c, const char *format, va_list va_arguments)
 	{
 		characters = va_arg(va_arguments, int);
 		*index_c = *index_c + print_of_character(1, characters, 1);
+	return (0);
 	}
 	else if (*format == 's')
 	{
 		str = va_arg(va_arguments, char*);
 		*index_c = *index_c + print_char_of_string(str);
+		return (0);
 	}
 	else if (*format == '%')
 	{
 		*index_c = *index_c + write(1, &ch, 1);
+		return (0);
 	}
 	else if (*format == 'd' || *format == 'i')
 	{
@@ -85,13 +88,15 @@ int helper(int *index_c, const char *format, va_list va_arguments)
 			neg_pos = !(*format == '+') ? 0 : 1;
 		}
 		*index_c = *index_c + print_numbers(integer_nb, neg_pos, integer_space);
+		return (0);
 	}
 	else
 	{
 		*index_c = *index_c + write(1, "%", 1);
 		*index_c = *index_c + write(1, format, 1);
+		return (0);
 	}
-	return (0);
+	
 }
 
 /**
