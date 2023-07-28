@@ -72,8 +72,9 @@ int helper(int *index_c, const char *format, va_list args)
 	char integer_space = 0;
 
 		format--;
-		while (*(++format) == '+' || *format == ' ')
+		while (*(format) == '+' || *format == ' ')
 		{
+			++format;
 			neg_pos = !(*format == '+') ? 0 : 1;
 		}
 		*index_c = *index_c + print_int(integer_nb, neg_pos, integer_space);
