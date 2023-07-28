@@ -42,7 +42,7 @@ int print_of_character(int first,int c, int last)
 	return (result);
 }
 /**
- * fuc_need - The function prints strings.
+ * func_format - The function prints strings.
  * @index_c: count number
  * @format: This is the pointer to the string.
  * @va_arguments: any arguments.
@@ -50,7 +50,7 @@ int print_of_character(int first,int c, int last)
  * Return: return -1 otherwise no return
  */
 
-int fuc_need(int *index_c, const char *format, va_list va_arguments)
+int func_format(int *index_c, const char *format, va_list va_arguments)
 {
 	char characters, ch = '%';
 	char *str;
@@ -124,10 +124,10 @@ int _printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			/*fuc_need function to define the format of char*/
+			/*func_format function to define the format of char*/
 			i++;
 			format++;
-			fuc_need(&index_counter, format, arguments);
+			func_format(&index_counter, format, arguments);
 		}
 		else
 		{
