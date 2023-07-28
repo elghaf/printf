@@ -46,8 +46,9 @@ int helper(int *index_c, const char *format, va_list args)
 {
 	char *str;
 	char characters, ch = '%';
+	const char *result = format;
 
-	if (*format == '\0')
+	if (*result == '\0')
 	{
 		return (-1);
 	}
