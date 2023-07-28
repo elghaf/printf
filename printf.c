@@ -63,7 +63,10 @@ int helper(int *index_c, const char *format, va_list args)
 	}
 	else if (*format == '%')
 	{
+	int i = 0;
+
 		*index_c += write(1, &ch, 1);
+		i++;
 	}
 	else if (*format == 'd' || *format == 'i')
 	{
