@@ -112,14 +112,15 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			/*helper function to define the format of char*/
+			i++;
 			format++;
 			helper(&index_counter, format, arguments);
 		}
 		else
 		{
+			i++;
 			index_counter = index_counter + write(1, format, 1);
 		}
-		i++;
 	}
 	va_end(arguments);
 	return (index_counter);
