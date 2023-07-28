@@ -15,7 +15,7 @@
 int print_int(int integer_print, char neg_pos, char integer_space)
 {
 	int index_counter = 0;
-	char buffer[12];
+	char character[12];
 	int string_len = 0, i = 0;
 
 	if (integer_print == INT_MIN)
@@ -43,12 +43,12 @@ int print_int(int integer_print, char neg_pos, char integer_space)
 
 	while (integer_print > 0)
 	{
-		buffer[string_len] = '0' + integer_print % 10;
+		character[string_len] = '0' + integer_print % 10;
 		integer_print /= 10;
 		i++;
 		string_len++;
 	}
 	while (string_len > 0)
-		index_counter = index_counter + write(1, &buffer[--string_len], 1);
+		index_counter = index_counter + write(1, &character[--string_len], 1);
 	return (index_counter);
 }
