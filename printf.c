@@ -26,7 +26,7 @@ int print_char_of_string(const char *str_char)
 }
 
 /**
- * print_character_C - This function prints char C.
+ * print_of_character - This function prints char C.
  * @first: file descriptor where to write the output.
  * @c: The character c.
  * @last: number of octets.
@@ -34,7 +34,7 @@ int print_char_of_string(const char *str_char)
  * Return: returns the character.
  */
 
-int print_character_C(int first,int c, int last)
+int print_of_character(int first,int c, int last)
 {
 	int result;
 
@@ -62,7 +62,7 @@ int helper(int *index_c, const char *format, va_list args)
 	else if (*format == 'c')
 	{
 		characters = va_arg(args, int);
-		*index_c = *index_c + print_character_C(1, characters, 1);
+		*index_c = *index_c + print_of_character(1, characters, 1);
 	}
 	else if (*format == 's')
 	{
