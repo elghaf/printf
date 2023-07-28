@@ -4,6 +4,17 @@
 #include "main.h"
 
 /**
+ * print_character - This function prints char C.
+ * @c: The character c.
+ *
+ * Return: returns the character.
+ */
+
+int print_character(int c)
+{
+	return (write(1, &c, 1));
+}
+/**
  * print_char_of_string - This fuction prints char of str.
  * @str_char: This is the pointer to the char str.
  *
@@ -57,19 +68,15 @@ int helper(int *index_c, const char *format, va_list args)
 	else if (*format == 'd' || *format == 'i')
 	{
 	int integer_nb = va_arg(args, int);
-	int j = 0;
-	int indexo = 0;
 	char neg_pos = 0;
 	char integer_space = 0;
 
 		format--;
 		while (*++format == '+' || *format == ' ')
 		{
-			j++;
 			neg_pos = !(*format == '+') ? 0 : 1;
 		}
 		*index_c += print_int(integer_nb, neg_pos, integer_space);
-		indexo++;
 	}
 	else
 	{
@@ -78,18 +85,6 @@ int helper(int *index_c, const char *format, va_list args)
 	}
 	return (0);
 }
-/**
- * print_character - This function prints char C.
- * @c: The character c.
- *
- * Return: returns the character.
- */
-
-int print_character(int c)
-{
-	return (write(1, &c, 1));
-}
-
 
 /**
  * _printf - This fuction prints the printf functionality
