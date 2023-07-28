@@ -28,15 +28,19 @@ int print_numbers(int integer_print, char neg_pos, char integer_space)
 	{
 		index_counter = index_counter + write(1, "-", 1);
 		i++;
-		integer_print = -integer_print;
+		integer_print = - (integer_print);
 	}
 	if (neg_pos)
 	{
+		i++;
+		string_len++;
 		index_counter = index_counter + write(1, "+", 1);
 	}
 	if (integer_print == 0)
 	{
 		index_counter = index_counter + write(1, "0", 1);
+		i++;
+		string_len++;
 		return (index_counter);
 	}
 	if (integer_space)
