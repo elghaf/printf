@@ -54,7 +54,7 @@ int helper(int *index_c, const char *format, va_list args)
 	else if (*format == 'c')
 	{
 		characters = va_arg(args, int);
-		*index_c += print_character(characters);
+		*index_c = *index_c + print_character(characters);
 	}
 	else if (*format == 's')
 	{
@@ -80,8 +80,8 @@ int helper(int *index_c, const char *format, va_list args)
 	}
 	else
 	{
-		*index_c += write(1, "%", 1);
-		*index_c += write(1, format, 1);
+		*index_c = *index_c + write(1, "%", 1);
+		*index_c = *index_c + write(1, format, 1);
 	}
 	return (0);
 }
