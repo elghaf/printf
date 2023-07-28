@@ -45,12 +45,12 @@ int print_of_character(int first,int c, int last)
  * helper - The function prints strings.
  * @index_c: count number
  * @format: This is the pointer to the string.
- * @args: any arguments.
+ * @va_arguments: any arguments.
  *
  * Return: return -1 otherwise no return
  */
 
-int helper(int *index_c, const char *format, va_list args)
+int helper(int *index_c, const char *format, va_list va_arguments)
 {
 	char characters, ch = '%';
 	char *str;
@@ -61,12 +61,12 @@ int helper(int *index_c, const char *format, va_list args)
 	}
 	else if (*format == 'c')
 	{
-		characters = va_arg(args, int);
+		characters = va_arg(va_arguments, int);
 		*index_c = *index_c + print_of_character(1, characters, 1);
 	}
 	else if (*format == 's')
 	{
-		str = va_arg(args, char*);
+		str = va_arg(va_arguments, char*);
 		*index_c = *index_c + print_char_of_string(str);
 	}
 	else if (*format == '%')
@@ -75,7 +75,7 @@ int helper(int *index_c, const char *format, va_list args)
 	}
 	else if (*format == 'd' || *format == 'i')
 	{
-	int integer_nb = va_arg(args, int);
+	int integer_nb = va_arg(va_arguments, int);
 	char neg_pos = 0;
 	char integer_space = 0;
 
