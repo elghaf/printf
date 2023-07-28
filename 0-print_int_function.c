@@ -15,10 +15,11 @@ int print_int(int integer_print, char neg_pos, char integer_space)
 {
 	int index_counter = 0;
 	char buffer[12];
-	int string_len = 0;
+	int string_len = 0, i = 0;
 
 	if (integer_print == INT_MIN)
 	{
+		i++;
 		index_counter = index_counter + write(1, "-2147483648", 11);
 		return (index_counter);
 	}
