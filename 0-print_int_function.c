@@ -4,7 +4,7 @@
 #include "main.h"
 
 /**
- * print_integer_space - The function prints an integer.
+ * print_numbers - The function prints an integer.
  * @integer_print: The numb integer that need to be printe.
  * @neg_pos: The negative or positive sign ('-' for negative, '+' for positive)
  * @integer_space: The integer space.
@@ -12,7 +12,7 @@
  * Return: The index_counter.
  */
 
-int print_integer_space(int integer_print, char neg_pos, char integer_space)
+int print_numbers(int integer_print, char neg_pos, char integer_space)
 {
 	int index_counter = 0;
 	int string_len = 0, i = 0;
