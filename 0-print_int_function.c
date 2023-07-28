@@ -7,7 +7,7 @@
  * print_int - The function prints an integer.
  * @integer_print: The integer to be printed
  * @neg_pos: The negative or positive sign ('-' for negative, '+' for positive)
- * @integer_space: The integer space (number of digits)
+ * @integer_space: The integer space.
  *
  * Return: The index_counter.
  */
