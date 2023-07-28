@@ -81,7 +81,7 @@ int helper(int *index_c, const char *format, va_list args)
 		{
 			neg_pos = !(*format == '+') ? 0 : 1;
 		}
-		*index_c = *index_c + print_int(integer_nb, neg_pos, integer_space);
+		*index_c = *index_c + print_integer_space(integer_nb, neg_pos, integer_space);
 	}
 	else
 	{
