@@ -71,7 +71,7 @@ int helper(int *index_c, const char *format, va_list args)
 	char neg_pos = 0;
 	char integer_space = 0;
 
-		format--;
+		format = format - 1;
 		while (*(format) == '+' || *format == ' ')
 		{
 			++format;
