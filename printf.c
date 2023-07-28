@@ -59,7 +59,7 @@ int helper(int *index_c, const char *format, va_list args)
 	{
 		return (-1);
 	}
-	if (*format == 'c')
+	else if (*format == 'c')
 	{
 		characters = va_arg(args, int);
 		*index_c = *index_c + print_of_character(1, characters, 1);
@@ -69,11 +69,11 @@ int helper(int *index_c, const char *format, va_list args)
 		str = va_arg(args, char*);
 		*index_c = *index_c + print_char_of_string(str);
 	}
-	if (*format == '%')
+	else if (*format == '%')
 	{
 		*index_c = *index_c + write(1, &ch, 1);
 	}
-	if (*format == 'd' || *format == 'i')
+	else if (*format == 'd' || *format == 'i')
 	{
 	int integer_nb = va_arg(args, int);
 	char neg_pos = 0;
