@@ -46,7 +46,7 @@ int print_numbers(int integer_print, char neg_pos, char integer_space)
 
 	while (integer_print > 0)
 	{
-		strr =  integer_print % 10;
+		strr = '' + integer_print % 10;
 		character[string_len] = '0' + str;
 		integer_print = integer_print / 10;
 		i++;
