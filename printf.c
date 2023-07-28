@@ -73,7 +73,7 @@ int helper(int *index_c, const char *format, va_list va_arguments)
 	{
 		*index_c = *index_c + write(1, &ch, 1);
 	}
-	else if (*format == 'd' || *format == 'i')
+	if (*format == 'd' || *format == 'i')
 	{
 	int integer_nb = va_arg(va_arguments, int);
 	char neg_pos = 0;
