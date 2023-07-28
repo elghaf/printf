@@ -59,7 +59,7 @@ int helper(int *index_c, const char *format, va_list args)
 	else if (*format == 's')
 	{
 		str = va_arg(args, char*);
-		*index_c += print_char_of_string(str);
+		*index_c = *index_c + print_char_of_string(str);
 	}
 	else if (*format == '%')
 	{
