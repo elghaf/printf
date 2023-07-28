@@ -15,14 +15,14 @@
 int print_numbers(int integer_print, char neg_pos, char integer_space)
 {
 	int index_counter = 0;
-	int result_int = integer_print;
+	int result_int = 1;
 	int string_len = 0, i = 0;
 	char character[12];
 
-	if (result_int == INT_MIN)
+	if (integer_print == INT_MIN)
 	{
 		i++;
-		index_counter = index_counter + write(1, "-2147483648", 11);
+		index_counter = index_counter + write(result_int, "-2147483648", 11);
 		return (index_counter);
 	}
 	if (integer_print < 0)
