@@ -15,7 +15,7 @@
 int print_numbers(int integer_print, char neg_pos, char integer_space)
 {
 	int index_counter = 0;
-	int result_int = 1;
+	unsigned result_int = 1;
 	int string_len = 0, i = 0;
 	char character[12];
 
