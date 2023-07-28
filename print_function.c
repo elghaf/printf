@@ -16,7 +16,7 @@ int print_numbers(int integer_print, char neg_pos, char integer_space)
 {
 	int index_counter = 0;
 	int string_len = 0, i = 0;
-	char character[20], char strr;
+	char character[20], strr;
 
 	if (integer_print == INT_MIN)
 	{
