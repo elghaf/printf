@@ -45,9 +45,9 @@ int print_char_of_string(const char *str_char)
 int helper(int *index_c, const char *format, va_list args)
 {
 	char characters, ch = '%';
-	char *str;	
+	char *str;
 
-	if (*result == '\0')
+	if (*format == '\0')
 	{
 		return (-1);
 	}
